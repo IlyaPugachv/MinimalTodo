@@ -6,6 +6,7 @@ extension String {
         //MARK: - ONBOARDING -
        
         static var writeWhatYouNeedToDoEveryday: String { localise("writeWhatYouNeedToDoEveryday") }
+        static var continuee: String { localise("continuee") }
     }
 }
 
