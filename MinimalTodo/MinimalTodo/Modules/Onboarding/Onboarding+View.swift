@@ -11,6 +11,8 @@ extension Onboarding {
         // MARK: - Subviews -
        
         private let appIconImageView: UIImageView = .init(image: .applicationIcon)
+        private let appNameLabel: UILabel = .init()
+        private let infoAboutAppLabel: UILabel = .init()
         
         // MARK: - Initializers -
         
@@ -50,12 +52,23 @@ extension Onboarding {
         private func buildHierarchy() {
             view.backgroundColor = .black
             view.addView(appIconImageView)
-          
+            view.addView(appNameLabel)
+            view.addView(infoAboutAppLabel)
         }
         
         private func configureSubviews() {
             
             appIconImageView.contentMode = .scaleAspectFit
+            
+            appNameLabel.textColor = .white
+            appNameLabel.font = .interSemibold(of: 39)
+            appNameLabel.text = "MinimalTodo"
+            
+            infoAboutAppLabel.textColor = .white
+            infoAboutAppLabel.font = .interMedium(of: 18)
+            infoAboutAppLabel.numberOfLines = 2
+            infoAboutAppLabel.text = .Localization.writeWhatYouNeedToDoEveryday
+            infoAboutAppLabel.textAlignment = .center
             
         }
         
@@ -67,7 +80,12 @@ extension Onboarding {
                 appIconImageView.widthAnchor.constraint(equalToConstant: 67.96),
                 appIconImageView.heightAnchor.constraint(equalToConstant: 55),
             
-            
+                appNameLabel.topAnchor.constraint(equalTo: appIconImageView.bottomAnchor, constant: 10),
+                appNameLabel.centerXAnchor.constraint(equalTo: appIconImageView.centerXAnchor),
+                
+                infoAboutAppLabel.topAnchor.constraint(equalTo: appNameLabel.bottomAnchor, constant: 10),
+                infoAboutAppLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 50),
+                infoAboutAppLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -50),
 
             
             ])
