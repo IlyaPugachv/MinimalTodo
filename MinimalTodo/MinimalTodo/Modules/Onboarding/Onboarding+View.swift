@@ -1,6 +1,6 @@
 import UIKit
 
-extension Main {
+extension Onboarding {
     class View: UIViewController {
         
         // MARK: - Properties -
@@ -49,7 +49,7 @@ extension Main {
         }
         
         private func buildHierarchy() {
-            view.backgroundColor = .red
+            view.backgroundColor = .black
           
         }
         
@@ -69,6 +69,6 @@ extension Main {
 
 // MARK: - Extension View -
 
-extension Main.View: MainView {
+extension Onboarding.View: OnboardingView {
     
 }
