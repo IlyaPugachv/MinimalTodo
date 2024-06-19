@@ -1,3 +1,7 @@
 //MARK: - ONBOARDING SCREEN LOCALIZATION -
 "writeWhatYouNeedToDoEveryday" = "Write what you need to do. Everyday.";
 "continuee" = "Continue";
+
+//MARK: - MAIN SCREEN LOCALIZATION -
+"allList" = "All List";
+"pinned" = "Pinned";

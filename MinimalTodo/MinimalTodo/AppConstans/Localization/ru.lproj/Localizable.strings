@@ -1,3 +1,7 @@
 //MARK: - ONBOARDING SCREEN LOCALIZATION -
+"writeWhatYouNeedToDoEveryday" = "Напишите, что вам нужно сделать. Ежедневно.";
 "continuee" = "Продолжить";
 
+//MARK: - MAIN SCREEN LOCALIZATION -
+"allList" = "Весь список";
+"pinned" = "Закрепленные";

@@ -25,6 +25,7 @@
 		BCB94C3D2C22E27E001BA890 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BCB94C3B2C22E27E001BA890 /* Localizable.strings */; };
 		BCB94C402C22E2B2001BA890 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C3F2C22E2B2001BA890 /* String+Localization.swift */; };
 		BCB94C422C22FDCE001BA890 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C412C22FDCE001BA890 /* UIViewController+Extension.swift */; };
+		BCB94C442C2311CB001BA890 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		BCB94C3E2C22E285001BA890 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BCB94C3F2C22E2B2001BA890 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		BCB94C412C22FDCE001BA890 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 		BCB94C1A2C22D13E001BA890 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BCB94C452C233601001BA890 /* CommonsView */,
 				BCB94C1B2C22D145001BA890 /* Extensions */,
 			);
 			path = Common;
@@ -190,6 +193,14 @@
 				BCB94C272C22D97C001BA890 /* Inter-Bold.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		BCB94C452C233601001BA890 /* CommonsView */ = {
+			isa = PBXGroup;
+			children = (
+				BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */,
+			);
+			path = CommonsView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,6 +286,7 @@
 				BCB94BCC2C21F7AB001BA890 /* AppDelegate.swift in Sources */,
 				BCB94C202C22D43F001BA890 /* Onboarding+Presenter.swift in Sources */,
 				BCB94BCE2C21F7AB001BA890 /* SceneDelegate.swift in Sources */,
+				BCB94C442C2311CB001BA890 /* CustomSegmentedControl.swift in Sources */,
 				BCB94C242C22D460001BA890 /* OnboardingView.swift in Sources */,
 				BCB94C222C22D451001BA890 /* Onboarding+View.swift in Sources */,
 				BCB94C2E2C22DC07001BA890 /* UIFont+Extensions.swift in Sources */,
