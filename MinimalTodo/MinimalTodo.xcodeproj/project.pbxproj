@@ -17,9 +17,10 @@
 		BCB94C202C22D43F001BA890 /* Onboarding+Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C1F2C22D43F001BA890 /* Onboarding+Presenter.swift */; };
 		BCB94C222C22D451001BA890 /* Onboarding+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C212C22D451001BA890 /* Onboarding+View.swift */; };
 		BCB94C242C22D460001BA890 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C232C22D460001BA890 /* OnboardingView.swift */; };
-		BCB94C282C22D97C001BA890 /* Graphik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCB94C272C22D97C001BA890 /* Graphik-Bold.ttf */; };
-		BCB94C2B2C22D9E4001BA890 /* Graphik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCB94C292C22D9E4001BA890 /* Graphik-Medium.ttf */; };
-		BCB94C2C2C22D9E4001BA890 /* Graphik-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCB94C2A2C22D9E4001BA890 /* Graphik-Semibold.ttf */; };
+		BCB94C282C22D97C001BA890 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCB94C272C22D97C001BA890 /* Inter-Bold.ttf */; };
+		BCB94C2B2C22D9E4001BA890 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCB94C292C22D9E4001BA890 /* Inter-Medium.ttf */; };
+		BCB94C2C2C22D9E4001BA890 /* Inter-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCB94C2A2C22D9E4001BA890 /* Inter-Semibold.ttf */; };
+		BCB94C2E2C22DC07001BA890 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C2D2C22DC07001BA890 /* UIFont+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,9 +36,10 @@
 		BCB94C1F2C22D43F001BA890 /* Onboarding+Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Onboarding+Presenter.swift"; sourceTree = "<group>"; };
 		BCB94C212C22D451001BA890 /* Onboarding+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Onboarding+View.swift"; sourceTree = "<group>"; };
 		BCB94C232C22D460001BA890 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		BCB94C272C22D97C001BA890 /* Graphik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Bold.ttf"; sourceTree = "<group>"; };
-		BCB94C292C22D9E4001BA890 /* Graphik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Medium.ttf"; sourceTree = "<group>"; };
-		BCB94C2A2C22D9E4001BA890 /* Graphik-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Semibold.ttf"; sourceTree = "<group>"; };
+		BCB94C272C22D97C001BA890 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
+		BCB94C292C22D9E4001BA890 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
+		BCB94C2A2C22D9E4001BA890 /* Inter-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Semibold.ttf"; sourceTree = "<group>"; };
+		BCB94C2D2C22DC07001BA890 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 		BCB94C1B2C22D145001BA890 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				BCB94C2D2C22DC07001BA890 /* UIFont+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -169,9 +172,9 @@
 		BCB94C262C22D90B001BA890 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				BCB94C292C22D9E4001BA890 /* Graphik-Medium.ttf */,
-				BCB94C2A2C22D9E4001BA890 /* Graphik-Semibold.ttf */,
-				BCB94C272C22D97C001BA890 /* Graphik-Bold.ttf */,
+				BCB94C292C22D9E4001BA890 /* Inter-Medium.ttf */,
+				BCB94C2A2C22D9E4001BA890 /* Inter-Semibold.ttf */,
+				BCB94C272C22D97C001BA890 /* Inter-Bold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -235,9 +238,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCB94BD52C21F7AC001BA890 /* Assets.xcassets in Resources */,
-				BCB94C2C2C22D9E4001BA890 /* Graphik-Semibold.ttf in Resources */,
-				BCB94C282C22D97C001BA890 /* Graphik-Bold.ttf in Resources */,
-				BCB94C2B2C22D9E4001BA890 /* Graphik-Medium.ttf in Resources */,
+				BCB94C2C2C22D9E4001BA890 /* Inter-Semibold.ttf in Resources */,
+				BCB94C282C22D97C001BA890 /* Inter-Bold.ttf in Resources */,
+				BCB94C2B2C22D9E4001BA890 /* Inter-Medium.ttf in Resources */,
 				BCB94BD82C21F7AC001BA890 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,6 +259,7 @@
 				BCB94BCE2C21F7AB001BA890 /* SceneDelegate.swift in Sources */,
 				BCB94C242C22D460001BA890 /* OnboardingView.swift in Sources */,
 				BCB94C222C22D451001BA890 /* Onboarding+View.swift in Sources */,
+				BCB94C2E2C22DC07001BA890 /* UIFont+Extensions.swift in Sources */,
 				BCB94C112C220FED001BA890 /* Main+Presenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
