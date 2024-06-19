@@ -9,10 +9,7 @@ extension Main {
         private lazy var safeArea = self.view.safeAreaLayoutGuide
         
         // MARK: - Subviews -
-       
-        
-        
-        
+  
         // MARK: - Initializers -
         
         public init(with presenter: Presenter) {

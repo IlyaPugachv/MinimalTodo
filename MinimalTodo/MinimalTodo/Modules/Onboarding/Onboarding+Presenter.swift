@@ -3,7 +3,7 @@ import Foundation
 extension Onboarding {
     class Presenter {
         
-        // MARK: - Properties
+        // MARK: - Properties -
         
         weak var view: OnboardingView?
         
@@ -17,9 +17,13 @@ extension Onboarding {
             print(#function, self)
         }
         
-        // MARK: - Methods
+        // MARK: - Methods -
         
-        // MARK: - Actions
+        func goToMainScreen() {
+            view?.navigate(to: Main.View.init(with: .init()))
+        }
+        
+        // MARK: - Actions -
         
         
     }

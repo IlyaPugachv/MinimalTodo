@@ -102,6 +102,11 @@ extension Onboarding {
         }
         
         private func setupActions() {
+
+            continueButton.addAction(UIAction(handler: { [weak self] _ in
+                guard let self else { return }
+                presenter.goToMainScreen()
+            }), for: .touchUpInside)
             
         }
     }

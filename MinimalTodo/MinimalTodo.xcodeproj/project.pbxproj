@@ -24,6 +24,7 @@
 		BCB94C302C22DF3F001BA890 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C2F2C22DF3F001BA890 /* UIView+Extensions.swift */; };
 		BCB94C3D2C22E27E001BA890 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BCB94C3B2C22E27E001BA890 /* Localizable.strings */; };
 		BCB94C402C22E2B2001BA890 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C3F2C22E2B2001BA890 /* String+Localization.swift */; };
+		BCB94C422C22FDCE001BA890 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C412C22FDCE001BA890 /* UIViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		BCB94C3C2C22E27E001BA890 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BCB94C3E2C22E285001BA890 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BCB94C3F2C22E2B2001BA890 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
+		BCB94C412C22FDCE001BA890 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 			children = (
 				BCB94C2D2C22DC07001BA890 /* UIFont+Extensions.swift */,
 				BCB94C2F2C22DF3F001BA890 /* UIView+Extensions.swift */,
+				BCB94C412C22FDCE001BA890 /* UIViewController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCB94C422C22FDCE001BA890 /* UIViewController+Extension.swift in Sources */,
 				BCB94C132C220FFE001BA890 /* Main+View.swift in Sources */,
 				BCB94C402C22E2B2001BA890 /* String+Localization.swift in Sources */,
 				BCB94C152C221009001BA890 /* MainView.swift in Sources */,
