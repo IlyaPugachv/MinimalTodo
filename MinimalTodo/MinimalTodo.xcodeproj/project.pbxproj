@@ -21,6 +21,7 @@
 		BCB94C2B2C22D9E4001BA890 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCB94C292C22D9E4001BA890 /* Inter-Medium.ttf */; };
 		BCB94C2C2C22D9E4001BA890 /* Inter-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCB94C2A2C22D9E4001BA890 /* Inter-Semibold.ttf */; };
 		BCB94C2E2C22DC07001BA890 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C2D2C22DC07001BA890 /* UIFont+Extensions.swift */; };
+		BCB94C302C22DF3F001BA890 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C2F2C22DF3F001BA890 /* UIView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		BCB94C292C22D9E4001BA890 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
 		BCB94C2A2C22D9E4001BA890 /* Inter-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Semibold.ttf"; sourceTree = "<group>"; };
 		BCB94C2D2C22DC07001BA890 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		BCB94C2F2C22DF3F001BA890 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				BCB94C2D2C22DC07001BA890 /* UIFont+Extensions.swift */,
+				BCB94C2F2C22DF3F001BA890 /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 			files = (
 				BCB94C132C220FFE001BA890 /* Main+View.swift in Sources */,
 				BCB94C152C221009001BA890 /* MainView.swift in Sources */,
+				BCB94C302C22DF3F001BA890 /* UIView+Extensions.swift in Sources */,
 				BCB94BCC2C21F7AB001BA890 /* AppDelegate.swift in Sources */,
 				BCB94C202C22D43F001BA890 /* Onboarding+Presenter.swift in Sources */,
 				BCB94BCE2C21F7AB001BA890 /* SceneDelegate.swift in Sources */,
