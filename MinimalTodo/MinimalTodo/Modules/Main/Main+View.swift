@@ -14,6 +14,9 @@ extension Main {
         private let nameAppLabel: UILabel = .init()
         private let searchImageView: UIImageView = .init()
         private let segmentedControl: CustomSegmentedControl = .init()
+        private let appImage: UIImageView = .init(image: .imageApp)
+        private let createTodoLabel: UILabel = .init()
+        private let newListButton: UIButton = .init()
         
         // MARK: - Initializers -
         
@@ -56,6 +59,9 @@ extension Main {
             view.addView(nameAppLabel)
             view.addView(searchImageView)
             view.addView(segmentedControl)
+            view.addView(appImage)
+            view.addView(createTodoLabel)
+            view.addView(newListButton)
         }
         
         private func configureSubviews() {
@@ -68,6 +74,18 @@ extension Main {
             
             searchImageView.image = UIImage(systemName: "magnifyingglass")
             searchImageView.tintColor = .black
+            
+            appImage.contentMode = .scaleAspectFit
+            
+            createTodoLabel.text = .Localization.createYourFirstTodoList
+            createTodoLabel.font = .interSemibold(of: 20)
+            createTodoLabel.textColor = .black
+            
+            newListButton.setTitle(.Localization.newList, for: .normal)
+            newListButton.setTitleColor(.white, for: .normal)
+            newListButton.titleLabel?.font = UIFont.interMedium(of: 14)
+            newListButton.backgroundColor = .black
+            newListButton.layer.cornerRadius = 15
         }
         
         private func layoutSubviews() {
@@ -90,6 +108,18 @@ extension Main {
                 segmentedControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
                 segmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
                 segmentedControl.heightAnchor.constraint(equalToConstant: 47),
+                
+                appImage.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 100),
+                appImage.widthAnchor.constraint(equalToConstant: 384),
+                appImage.heightAnchor.constraint(equalToConstant: 202),
+                
+                createTodoLabel.topAnchor.constraint(equalTo: appImage.bottomAnchor, constant: 110),
+                createTodoLabel.centerXAnchor.constraint(equalTo: appImage.centerXAnchor),
+                
+                newListButton.topAnchor.constraint(equalTo: createTodoLabel.bottomAnchor, constant: 25),
+                newListButton.centerXAnchor.constraint(equalTo: appImage.centerXAnchor),
+                newListButton.widthAnchor.constraint(equalToConstant: 124),
+                newListButton.heightAnchor.constraint(equalToConstant: 44),
             ])
         }
         

@@ -5,3 +5,5 @@
 //MARK: - MAIN SCREEN LOCALIZATION -
 "allList" = "Весь список";
 "pinned" = "Закрепленные";
+"createYourFirstTodoList" = "Создайте свой первый список дел";
+"newList" = "+ Новый список";

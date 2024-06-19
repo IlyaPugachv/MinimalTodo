@@ -10,6 +10,8 @@ extension String {
         //MARK: - MAIN -
         static var allList: String { localise("allList") }
         static var pinned: String { localise("pinned") }
+        static var createYourFirstTodoList: String { localise("createYourFirstTodoList") }
+        static var newList: String { localise("newList") }
     }
 }
 
