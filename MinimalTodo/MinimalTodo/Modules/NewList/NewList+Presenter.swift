@@ -1,11 +1,11 @@
 import Foundation
 
-extension Main {
+extension NewList {
     class Presenter {
         
-        // MARK: - Properties - 
+        // MARK: - Properties -
         
-        weak var view: MainView?
+        weak var view: NewListView?
         
         // MARK: - Initializers
         
@@ -19,11 +19,7 @@ extension Main {
         
         // MARK: - Methods -
         
-        func goToNewListScreen() {
-            view?.navigate(to: NewList.View.init(with: .init()))
-        }
-        
-        // MARK: - Actions -
+        // MARK: - Actions - 
         
         
     }

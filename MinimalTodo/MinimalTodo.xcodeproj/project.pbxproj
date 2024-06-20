@@ -26,6 +26,9 @@
 		BCB94C402C22E2B2001BA890 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C3F2C22E2B2001BA890 /* String+Localization.swift */; };
 		BCB94C422C22FDCE001BA890 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C412C22FDCE001BA890 /* UIViewController+Extension.swift */; };
 		BCB94C442C2311CB001BA890 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */; };
+		BCB94C482C242D52001BA890 /* NewList+Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C472C242D52001BA890 /* NewList+Presenter.swift */; };
+		BCB94C4A2C242D60001BA890 /* NewList+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C492C242D60001BA890 /* NewList+View.swift */; };
+		BCB94C4C2C242D69001BA890 /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C4B2C242D69001BA890 /* NewListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +54,9 @@
 		BCB94C3F2C22E2B2001BA890 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		BCB94C412C22FDCE001BA890 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		BCB94C472C242D52001BA890 /* NewList+Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewList+Presenter.swift"; sourceTree = "<group>"; };
+		BCB94C492C242D60001BA890 /* NewList+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewList+View.swift"; sourceTree = "<group>"; };
+		BCB94C4B2C242D69001BA890 /* NewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +133,7 @@
 			children = (
 				BCB94C1E2C22D3CD001BA890 /* Onboarding */,
 				BCB94C0F2C220FD1001BA890 /* Main */,
+				BCB94C462C242D20001BA890 /* NewList */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -201,6 +208,16 @@
 				BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */,
 			);
 			path = CommonsView;
+			sourceTree = "<group>";
+		};
+		BCB94C462C242D20001BA890 /* NewList */ = {
+			isa = PBXGroup;
+			children = (
+				BCB94C472C242D52001BA890 /* NewList+Presenter.swift */,
+				BCB94C492C242D60001BA890 /* NewList+View.swift */,
+				BCB94C4B2C242D69001BA890 /* NewListView.swift */,
+			);
+			path = NewList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,9 +303,12 @@
 				BCB94BCC2C21F7AB001BA890 /* AppDelegate.swift in Sources */,
 				BCB94C202C22D43F001BA890 /* Onboarding+Presenter.swift in Sources */,
 				BCB94BCE2C21F7AB001BA890 /* SceneDelegate.swift in Sources */,
+				BCB94C4A2C242D60001BA890 /* NewList+View.swift in Sources */,
 				BCB94C442C2311CB001BA890 /* CustomSegmentedControl.swift in Sources */,
 				BCB94C242C22D460001BA890 /* OnboardingView.swift in Sources */,
 				BCB94C222C22D451001BA890 /* Onboarding+View.swift in Sources */,
+				BCB94C482C242D52001BA890 /* NewList+Presenter.swift in Sources */,
+				BCB94C4C2C242D69001BA890 /* NewListView.swift in Sources */,
 				BCB94C2E2C22DC07001BA890 /* UIFont+Extensions.swift in Sources */,
 				BCB94C112C220FED001BA890 /* Main+Presenter.swift in Sources */,
 			);

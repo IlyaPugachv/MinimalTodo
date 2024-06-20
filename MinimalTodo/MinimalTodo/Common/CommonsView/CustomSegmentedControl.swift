@@ -9,6 +9,7 @@ final class CustomSegmentedControl: UIView {
         button.backgroundColor = .black
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         button.layer.cornerRadius = 10
+        button.layer.zPosition = 1
         button.clipsToBounds = true
         return button
     }()

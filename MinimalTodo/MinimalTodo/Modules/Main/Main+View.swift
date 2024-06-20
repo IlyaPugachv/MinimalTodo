@@ -125,6 +125,10 @@ extension Main {
         
         private func setupActions() {
             
+            newListButton.addAction(UIAction(handler: { [weak self] _ in
+                guard let self else { return }
+                presenter.goToNewListScreen()
+            }), for: .touchUpInside)
         }
     }
 }
