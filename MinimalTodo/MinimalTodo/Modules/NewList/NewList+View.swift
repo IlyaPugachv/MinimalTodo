@@ -18,6 +18,11 @@ extension NewList {
         private let stackView: UIStackView = .init()
         private let addButtonStack: UIStackView = .init()
         private let toggleButton = ToggleButton()
+        private let stack = HorizontalButtonStack()
+        
+        private let chooseLabel: UILabel = .init()
+        
+        private var separatorView: UIView = .init()
         
         // MARK: - Initializers -
         
@@ -59,7 +64,9 @@ extension NewList {
             view.addView(titleTextField)
             view.addView(stackView)
             view.addView(addButtonStack)
-            
+            view.addView(stack)
+            view.addView(chooseLabel)
+            view.addView(separatorView)
         }
         
         private func configureSubviews() {
@@ -94,6 +101,12 @@ extension NewList {
             
             addButtonStack.addArrangedSubview(plusTodoImageView)
             addButtonStack.addArrangedSubview(addListButton)
+            
+            chooseLabel.text = "Choose a label"
+            chooseLabel.font = .interSemibold(of: 20)
+            chooseLabel.textColor = .black
+            
+            separatorView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
         }
         
         private func layoutSubviews() {
@@ -116,7 +129,21 @@ extension NewList {
                 addButtonStack.bottomAnchor.constraint(lessThanOrEqualTo: safeArea.bottomAnchor, constant: -20),
                 
                 plusTodoImageView.widthAnchor.constraint(equalToConstant: 20),
-                plusTodoImageView.heightAnchor.constraint(equalToConstant: 20)
+                plusTodoImageView.heightAnchor.constraint(equalToConstant: 20),
+                
+                separatorView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -150),
+                separatorView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
+                separatorView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+                separatorView.heightAnchor.constraint(equalToConstant: 1),
+                
+                chooseLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 20),
+                chooseLabel.leadingAnchor.constraint(equalTo: separatorView.leadingAnchor),
+                
+                stack.topAnchor.constraint(equalTo: chooseLabel.bottomAnchor, constant: 35),
+                stack.leadingAnchor.constraint(equalTo: separatorView.leadingAnchor),
+                stack.trailingAnchor.constraint(equalTo: separatorView.trailingAnchor),
+                
+              
             ])
         }
         
@@ -162,7 +189,7 @@ extension NewList {
             
             return hStack
         }
-        
+
         @objc private func toggleCheckBox(_ sender: UIButton) {
             sender.isSelected.toggle()
         }
