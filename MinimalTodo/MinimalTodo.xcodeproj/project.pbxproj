@@ -29,6 +29,7 @@
 		BCB94C482C242D52001BA890 /* NewList+Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C472C242D52001BA890 /* NewList+Presenter.swift */; };
 		BCB94C4A2C242D60001BA890 /* NewList+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C492C242D60001BA890 /* NewList+View.swift */; };
 		BCB94C4C2C242D69001BA890 /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C4B2C242D69001BA890 /* NewListView.swift */; };
+		BCB94C4E2C256D46001BA890 /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C4D2C256D46001BA890 /* ToggleButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		BCB94C472C242D52001BA890 /* NewList+Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewList+Presenter.swift"; sourceTree = "<group>"; };
 		BCB94C492C242D60001BA890 /* NewList+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewList+View.swift"; sourceTree = "<group>"; };
 		BCB94C4B2C242D69001BA890 /* NewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
+		BCB94C4D2C256D46001BA890 /* ToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */,
+				BCB94C4D2C256D46001BA890 /* ToggleButton.swift */,
 			);
 			path = CommonsView;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				BCB94C132C220FFE001BA890 /* Main+View.swift in Sources */,
 				BCB94C402C22E2B2001BA890 /* String+Localization.swift in Sources */,
 				BCB94C152C221009001BA890 /* MainView.swift in Sources */,
+				BCB94C4E2C256D46001BA890 /* ToggleButton.swift in Sources */,
 				BCB94C302C22DF3F001BA890 /* UIView+Extensions.swift in Sources */,
 				BCB94BCC2C21F7AB001BA890 /* AppDelegate.swift in Sources */,
 				BCB94C202C22D43F001BA890 /* Onboarding+Presenter.swift in Sources */,

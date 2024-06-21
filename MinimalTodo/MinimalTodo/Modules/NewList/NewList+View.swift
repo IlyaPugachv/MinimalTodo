@@ -12,10 +12,12 @@ extension NewList {
         
         private var todoItems: [TodoItem] = []
         
+        private let titleTextField: UITextField = .init()
         private let plusTodoImageView: UIImageView = .init()
         private let addListButton: UIButton = .init()
         private let stackView: UIStackView = .init()
         private let addButtonStack: UIStackView = .init()
+        private let toggleButton = ToggleButton()
         
         // MARK: - Initializers -
         
@@ -53,16 +55,28 @@ extension NewList {
         
         private func buildHierarchy() {
             view.backgroundColor = .white
-            view.addSubview(stackView)
-            view.addSubview(addButtonStack)
+            view.addView(toggleButton)
+            view.addView(titleTextField)
+            view.addView(stackView)
+            view.addView(addButtonStack)
+            
         }
         
         private func configureSubviews() {
+            
+            titleTextField.placeholder = "Title"
+            titleTextField.font = UIFont.systemFont(
+                ofSize: 24,
+                weight: .bold
+            )
+            
+            titleTextField.returnKeyType = .done
+            titleTextField.delegate = self
+            
             stackView.axis = .vertical
             stackView.alignment = .fill
             stackView.distribution = .fill
             stackView.spacing = 8
-            stackView.translatesAutoresizingMaskIntoConstraints = false
             
             plusTodoImageView.image = UIImage(systemName: "plus.square")
             plusTodoImageView.tintColor = .black
@@ -77,7 +91,6 @@ extension NewList {
             addButtonStack.alignment = .center
             addButtonStack.distribution = .fill
             addButtonStack.spacing = 8
-            addButtonStack.translatesAutoresizingMaskIntoConstraints = false
             
             addButtonStack.addArrangedSubview(plusTodoImageView)
             addButtonStack.addArrangedSubview(addListButton)
@@ -85,7 +98,15 @@ extension NewList {
         
         private func layoutSubviews() {
             NSLayoutConstraint.activate([
-                stackView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
+                
+                toggleButton.topAnchor.constraint(equalTo: safeArea.topAnchor),
+                toggleButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
+                
+                titleTextField.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
+                titleTextField.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
+                titleTextField.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+                
+                stackView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 20),
                 stackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
                 stackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
                 
