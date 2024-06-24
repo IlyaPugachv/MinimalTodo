@@ -2,7 +2,6 @@ import UIKit
 
 struct TodoList {
     var title: String
-    var items: [String]
     var label: String
     var date: String
 }
@@ -21,7 +20,7 @@ extension NewList {
         private let backButton: UIButton = .init()
         private let toggleButton = ToggleButton()
         
-        private var todoItems: [TodoItem] = []
+       
         
         private let titleTextField: UITextField = .init()
         private let plusTodoImageView: UIImageView = .init()
@@ -107,15 +106,7 @@ extension NewList {
             stackView.alignment = .fill
             stackView.distribution = .fill
             stackView.spacing = 8
-            
-            plusTodoImageView.image = UIImage(systemName: "plus.square")
-            plusTodoImageView.tintColor = .black
-            plusTodoImageView.contentMode = .scaleAspectFit
-            
-            addListButton.setTitle("To-do", for: .normal)
-            addListButton.setTitleColor(.lightGray, for: .normal)
-            addListButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-            addListButton.addTarget(self, action: #selector(addTodoItem), for: .touchUpInside)
+
             
             addButtonStack.axis = .horizontal
             addButtonStack.alignment = .center
@@ -172,17 +163,7 @@ extension NewList {
                 
             ])
         }
-        
-        private func addItemView(_ item: TodoItem) {
-            let itemView = createItemView(item)
-            stackView.addArrangedSubview(itemView)
-        }
-        
-        private func createItemView(_ item: TodoItem) -> UIView {
-            let itemView = TodoItemView(item: item, delegate: self, checkBoxAction: #selector(toggleCheckBox(_:)), target: self)
-            return itemView
-        }
-        
+  
         private func setupActions() {
             backButton.addAction(UIAction(handler: { [weak self] _ in
                 guard let self else { return }
@@ -197,11 +178,10 @@ extension NewList {
         
         private func saveTodoList() {
             let title = titleTextField.text ?? ""
-            let items = todoItems.map { $0.title }
             let label = "Personal" // или другая выбранная метка
-            let date = "13-05-2022" // текущая дата или другая дата
+            let date = DateFormatter.formattedDate()
             
-            let newList = TodoList(title: title, items: items, label: label, date: date)
+            let newList = TodoList(title: title, label: label, date: date)
             todoLists.append(newList)
             
             presenter.updateMainView(with: newList)
@@ -217,12 +197,7 @@ extension NewList {
             sender.isSelected.toggle()
         }
         
-        @objc
-        private func addTodoItem() {
-            let newItem = TodoItem(title: "")
-            todoItems.append(newItem)
-            addItemView(newItem)
-        }
+
     }
 }
 
@@ -232,11 +207,5 @@ extension NewList.View: NewListView, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let itemView = textField.superview as? TodoItemView {
-            itemView.textFieldDidEndEditing(textField)
-        }
     }
 }

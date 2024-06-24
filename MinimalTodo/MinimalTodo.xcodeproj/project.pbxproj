@@ -33,6 +33,7 @@
 		BCB94C502C257E7E001BA890 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C4F2C257E7E001BA890 /* UIButton+Extensions.swift */; };
 		BCB94C522C2580B6001BA890 /* HorizontalButtonStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C512C2580B6001BA890 /* HorizontalButtonStack.swift */; };
 		BCB94C542C2960B8001BA890 /* TodoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C532C2960B8001BA890 /* TodoItemView.swift */; };
+		BCB94C5C2C29C966001BA890 /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C5B2C29C966001BA890 /* DateFormatter+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		BCB94C4F2C257E7E001BA890 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		BCB94C512C2580B6001BA890 /* HorizontalButtonStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalButtonStack.swift; sourceTree = "<group>"; };
 		BCB94C532C2960B8001BA890 /* TodoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemView.swift; sourceTree = "<group>"; };
+		BCB94C5B2C29C966001BA890 /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				BCB94C2F2C22DF3F001BA890 /* UIView+Extensions.swift */,
 				BCB94C412C22FDCE001BA890 /* UIViewController+Extension.swift */,
 				BCB94C4F2C257E7E001BA890 /* UIButton+Extensions.swift */,
+				BCB94C5B2C29C966001BA890 /* DateFormatter+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 			files = (
 				BCB94C422C22FDCE001BA890 /* UIViewController+Extension.swift in Sources */,
 				BCB94C132C220FFE001BA890 /* Main+View.swift in Sources */,
+				BCB94C5C2C29C966001BA890 /* DateFormatter+Extensions.swift in Sources */,
 				BCB94C402C22E2B2001BA890 /* String+Localization.swift in Sources */,
 				BCB94C152C221009001BA890 /* MainView.swift in Sources */,
 				BCB94C4E2C256D46001BA890 /* ToggleButton.swift in Sources */,
