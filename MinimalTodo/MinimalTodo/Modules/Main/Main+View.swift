@@ -172,50 +172,8 @@ extension Main {
     }
 }
 
-class TodoListView: UIView {
-    
-    init(todoList: TodoList) {
-        super.init(frame: .zero)
-        translatesAutoresizingMaskIntoConstraints = false
-        
-        let titleLabel = UILabel()
-        titleLabel.text = todoList.title
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        
-        let dateLabel = UILabel()
-        dateLabel.text = todoList.date
-        dateLabel.font = UIFont.systemFont(ofSize: 14)
-        dateLabel.textColor = .gray
-        
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, dateLabel])
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.spacing = 4
-        
-        addSubview(stackView)
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-        ])
-        
-        backgroundColor = .white
-        layer.cornerRadius = 10
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.1
-        layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowRadius = 4
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
+
 
 extension Main.View: MainView {
     
 }
-

@@ -12,15 +12,14 @@ extension NewList {
         // MARK: - Properties -
         
         var presenter: Presenter!
-               private lazy var safeArea = self.view.safeAreaLayoutGuide
-               private var todoLists: [TodoList] = []
+        private lazy var safeArea = self.view.safeAreaLayoutGuide
+        private var todoLists: [TodoList] = []
+        private var selectedLabel: String?
         
         // MARK: - Subviews -
         
         private let backButton: UIButton = .init()
         private let toggleButton = ToggleButton()
-        
-       
         
         private let titleTextField: UITextField = .init()
         private let plusTodoImageView: UIImageView = .init()
@@ -31,7 +30,10 @@ extension NewList {
         private var separatorView: UIView = .init()
         private let chooseLabel: UILabel = .init()
         
-        private let horizontalButtonStackView = HorizontalButtonStack()
+        private let helloButton: UIButton = .init()
+        private let byeButton: UIButton = .init()
+        private let seeButton: UIButton = .init()
+        private let haveButton: UIButton = .init()
         
         // MARK: - Initializers -
         
@@ -76,9 +78,13 @@ extension NewList {
             view.addView(titleTextField)
             view.addView(stackView)
             view.addView(addButtonStack)
-            view.addView(horizontalButtonStackView)
+
             view.addView(chooseLabel)
             view.addView(separatorView)
+            view.addSubview(helloButton)
+            view.addSubview(byeButton)
+            view.addSubview(seeButton)
+            view.addSubview(haveButton)
         }
         
         private func configureSubviews() {
@@ -121,6 +127,20 @@ extension NewList {
             chooseLabel.textColor = .black
             
             separatorView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+            
+            // Configure label buttons
+            [helloButton, byeButton, seeButton, haveButton].forEach {
+                $0.setTitleColor(.black, for: .normal)
+                $0.backgroundColor = .lightGray
+                $0.layer.cornerRadius = 8
+                $0.translatesAutoresizingMaskIntoConstraints = false
+                $0.addTarget(self, action: #selector(labelButtonTapped(_:)), for: .touchUpInside)
+            }
+            
+            helloButton.setTitle("Привет", for: .normal)
+            byeButton.setTitle("Пока", for: .normal)
+            seeButton.setTitle("Вижу", for: .normal)
+            haveButton.setTitle("Есть", for: .normal)
         }
         
         private func layoutSubviews() {
@@ -156,11 +176,25 @@ extension NewList {
                 chooseLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 20),
                 chooseLabel.leadingAnchor.constraint(equalTo: separatorView.leadingAnchor),
                 
-                horizontalButtonStackView.topAnchor.constraint(equalTo: chooseLabel.bottomAnchor, constant: 35),
-                horizontalButtonStackView.leadingAnchor.constraint(equalTo: separatorView.leadingAnchor),
-                horizontalButtonStackView.trailingAnchor.constraint(equalTo: separatorView.trailingAnchor),
+                helloButton.topAnchor.constraint(equalTo: chooseLabel.bottomAnchor, constant: 10),
+                helloButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                helloButton.widthAnchor.constraint(equalToConstant: 60),
+                helloButton.heightAnchor.constraint(equalToConstant: 40),
                 
+                byeButton.topAnchor.constraint(equalTo: chooseLabel.bottomAnchor, constant: 10),
+                byeButton.leadingAnchor.constraint(equalTo: helloButton.trailingAnchor, constant: 10),
+                byeButton.widthAnchor.constraint(equalToConstant: 60),
+                byeButton.heightAnchor.constraint(equalToConstant: 40),
                 
+                seeButton.topAnchor.constraint(equalTo: chooseLabel.bottomAnchor, constant: 10),
+                seeButton.leadingAnchor.constraint(equalTo: byeButton.trailingAnchor, constant: 10),
+                seeButton.widthAnchor.constraint(equalToConstant: 60),
+                seeButton.heightAnchor.constraint(equalToConstant: 40),
+                
+                haveButton.topAnchor.constraint(equalTo: chooseLabel.bottomAnchor, constant: 10),
+                haveButton.leadingAnchor.constraint(equalTo: seeButton.trailingAnchor, constant: 10),
+                haveButton.widthAnchor.constraint(equalToConstant: 60),
+                haveButton.heightAnchor.constraint(equalToConstant: 40),
             ])
         }
   
@@ -176,9 +210,17 @@ extension NewList {
             }), for: .touchUpInside)
         }
         
+        @objc private func labelButtonTapped(_ sender: UIButton) {
+            [helloButton, byeButton, seeButton, haveButton].forEach {
+                $0.backgroundColor = .lightGray
+            }
+            sender.backgroundColor = .black
+            selectedLabel = sender.title(for: .normal)
+        }
+        
         private func saveTodoList() {
             let title = titleTextField.text ?? ""
-            let label = "Personal" // или другая выбранная метка
+            let label = selectedLabel ?? "Personal"
             let date = DateFormatter.formattedDate()
             
             let newList = TodoList(title: title, label: label, date: date)
@@ -187,8 +229,6 @@ extension NewList {
             presenter.updateMainView(with: newList)
             presenter.back()
         }
-    
-
         
         // MARK: - OBJC FUNC -
         
@@ -196,16 +236,15 @@ extension NewList {
         private func toggleCheckBox(_ sender: UIButton) {
             sender.isSelected.toggle()
         }
-        
-
     }
 }
 
 // MARK: - Extension View -
 
-extension NewList.View: NewListView, UITextFieldDelegate { 
+extension NewList.View: NewListView, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
 }
+

@@ -31,9 +31,8 @@
 		BCB94C4C2C242D69001BA890 /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C4B2C242D69001BA890 /* NewListView.swift */; };
 		BCB94C4E2C256D46001BA890 /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C4D2C256D46001BA890 /* ToggleButton.swift */; };
 		BCB94C502C257E7E001BA890 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C4F2C257E7E001BA890 /* UIButton+Extensions.swift */; };
-		BCB94C522C2580B6001BA890 /* HorizontalButtonStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C512C2580B6001BA890 /* HorizontalButtonStack.swift */; };
-		BCB94C542C2960B8001BA890 /* TodoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C532C2960B8001BA890 /* TodoItemView.swift */; };
 		BCB94C5C2C29C966001BA890 /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C5B2C29C966001BA890 /* DateFormatter+Extensions.swift */; };
+		BCB94C5F2C29D0A7001BA890 /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,9 +63,8 @@
 		BCB94C4B2C242D69001BA890 /* NewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
 		BCB94C4D2C256D46001BA890 /* ToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
 		BCB94C4F2C257E7E001BA890 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
-		BCB94C512C2580B6001BA890 /* HorizontalButtonStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalButtonStack.swift; sourceTree = "<group>"; };
-		BCB94C532C2960B8001BA890 /* TodoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemView.swift; sourceTree = "<group>"; };
 		BCB94C5B2C29C966001BA890 /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
+		BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +109,7 @@
 		BCB94C0F2C220FD1001BA890 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */,
 				BCB94C102C220FED001BA890 /* Main+Presenter.swift */,
 				BCB94C122C220FFE001BA890 /* Main+View.swift */,
 				BCB94C142C221009001BA890 /* MainView.swift */,
@@ -217,10 +216,8 @@
 		BCB94C452C233601001BA890 /* CommonsView */ = {
 			isa = PBXGroup;
 			children = (
-				BCB94C532C2960B8001BA890 /* TodoItemView.swift */,
 				BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */,
 				BCB94C4D2C256D46001BA890 /* ToggleButton.swift */,
-				BCB94C512C2580B6001BA890 /* HorizontalButtonStack.swift */,
 			);
 			path = CommonsView;
 			sourceTree = "<group>";
@@ -312,6 +309,7 @@
 			files = (
 				BCB94C422C22FDCE001BA890 /* UIViewController+Extension.swift in Sources */,
 				BCB94C132C220FFE001BA890 /* Main+View.swift in Sources */,
+				BCB94C5F2C29D0A7001BA890 /* TodoListView.swift in Sources */,
 				BCB94C5C2C29C966001BA890 /* DateFormatter+Extensions.swift in Sources */,
 				BCB94C402C22E2B2001BA890 /* String+Localization.swift in Sources */,
 				BCB94C152C221009001BA890 /* MainView.swift in Sources */,
@@ -320,8 +318,6 @@
 				BCB94BCC2C21F7AB001BA890 /* AppDelegate.swift in Sources */,
 				BCB94C202C22D43F001BA890 /* Onboarding+Presenter.swift in Sources */,
 				BCB94BCE2C21F7AB001BA890 /* SceneDelegate.swift in Sources */,
-				BCB94C542C2960B8001BA890 /* TodoItemView.swift in Sources */,
-				BCB94C522C2580B6001BA890 /* HorizontalButtonStack.swift in Sources */,
 				BCB94C4A2C242D60001BA890 /* NewList+View.swift in Sources */,
 				BCB94C442C2311CB001BA890 /* CustomSegmentedControl.swift in Sources */,
 				BCB94C242C22D460001BA890 /* OnboardingView.swift in Sources */,
