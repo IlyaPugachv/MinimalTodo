@@ -66,6 +66,8 @@ extension Main {
         
         private func configureSubviews() {
             
+            navigationItem.hidesBackButton = true
+            
             appMiniIconImageView.contentMode = .scaleAspectFit
             
             nameAppLabel.text = "MinimalTodo"

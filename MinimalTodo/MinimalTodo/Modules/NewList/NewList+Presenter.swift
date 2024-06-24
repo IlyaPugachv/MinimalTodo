@@ -19,7 +19,11 @@ extension NewList {
         
         // MARK: - Methods -
         
-        // MARK: - Actions - 
+        func back() {
+            view?.pop(animated: true)
+        }
+        
+        // MARK: - Actions -
         
         
     }

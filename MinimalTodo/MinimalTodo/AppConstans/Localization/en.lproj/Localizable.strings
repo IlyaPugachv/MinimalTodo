@@ -7,3 +7,11 @@
 "pinned" = "Pinned";
 "createYourFirstTodoList" = "Create your first to-do list";
 "newList" = "+ New List";
+
+//MARK: - Create New List SCREEN LOCALIZATION -
+"title" = "Title";
+"chooseALabel" = "Choose a label";
+"personal" = "Personal";
+"work" = "Work";
+"finance" = "Finance";
+"other" = "Other";

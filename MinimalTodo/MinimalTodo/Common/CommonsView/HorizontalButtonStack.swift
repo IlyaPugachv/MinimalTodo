@@ -2,9 +2,15 @@ import UIKit
 
 class HorizontalButtonStack: UIStackView {
     
-    // MARK: - Properties
+    // MARK: - Properties -
     
-    private let buttonTitles = ["Привет", "Пока", "четыре", "восемь"]
+    private let buttonTitles: [String] = [
+        .Localization.personal,
+        .Localization.work,
+        .Localization.finance,
+        .Localization.other,
+    ]
+    
     private var buttons: [UIButton] = []
     private var selectedButton: UIButton?
     

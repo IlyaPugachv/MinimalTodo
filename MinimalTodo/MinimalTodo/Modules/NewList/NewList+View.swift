@@ -10,6 +10,9 @@ extension NewList {
         
         // MARK: - Subviews -
         
+        private let backButton: UIButton = .init()
+        private let toggleButton = ToggleButton()
+        
         private var todoItems: [TodoItem] = []
         
         private let titleTextField: UITextField = .init()
@@ -17,12 +20,11 @@ extension NewList {
         private let addListButton: UIButton = .init()
         private let stackView: UIStackView = .init()
         private let addButtonStack: UIStackView = .init()
-        private let toggleButton = ToggleButton()
-        private let stack = HorizontalButtonStack()
-        
-        private let chooseLabel: UILabel = .init()
         
         private var separatorView: UIView = .init()
+        private let chooseLabel: UILabel = .init()
+        
+        private let horizontalButtonStackView = HorizontalButtonStack()
         
         // MARK: - Initializers -
         
@@ -56,22 +58,35 @@ extension NewList {
             buildHierarchy()
             configureSubviews()
             layoutSubviews()
+            setupActions()
         }
         
         private func buildHierarchy() {
             view.backgroundColor = .white
+            
             view.addView(toggleButton)
+            view.addView(backButton)
             view.addView(titleTextField)
             view.addView(stackView)
             view.addView(addButtonStack)
-            view.addView(stack)
+            view.addView(horizontalButtonStackView)
             view.addView(chooseLabel)
             view.addView(separatorView)
         }
         
         private func configureSubviews() {
             
-            titleTextField.placeholder = "Title"
+            backButton.setImage(UIImage(named: "custom_back_arrow"), for: .normal)
+            
+            let backButtonItem = UIBarButtonItem(customView: backButton)
+            navigationItem.leftBarButtonItem = backButtonItem
+            
+            navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+            
+            let toggleButtonItem = UIBarButtonItem(customView: toggleButton)
+            navigationItem.rightBarButtonItem = toggleButtonItem
+            
+            titleTextField.placeholder = .Localization.title
             titleTextField.font = UIFont.systemFont(
                 ofSize: 24,
                 weight: .bold
@@ -102,7 +117,7 @@ extension NewList {
             addButtonStack.addArrangedSubview(plusTodoImageView)
             addButtonStack.addArrangedSubview(addListButton)
             
-            chooseLabel.text = "Choose a label"
+            chooseLabel.text = .Localization.chooseALabel
             chooseLabel.font = .interSemibold(of: 20)
             chooseLabel.textColor = .black
             
@@ -114,6 +129,9 @@ extension NewList {
                 
                 toggleButton.topAnchor.constraint(equalTo: safeArea.topAnchor),
                 toggleButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
+                
+                backButton.topAnchor.constraint(equalTo: toggleButton.topAnchor),
+                backButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
                 
                 titleTextField.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
                 titleTextField.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
@@ -139,18 +157,12 @@ extension NewList {
                 chooseLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 20),
                 chooseLabel.leadingAnchor.constraint(equalTo: separatorView.leadingAnchor),
                 
-                stack.topAnchor.constraint(equalTo: chooseLabel.bottomAnchor, constant: 35),
-                stack.leadingAnchor.constraint(equalTo: separatorView.leadingAnchor),
-                stack.trailingAnchor.constraint(equalTo: separatorView.trailingAnchor),
+                horizontalButtonStackView.topAnchor.constraint(equalTo: chooseLabel.bottomAnchor, constant: 35),
+                horizontalButtonStackView.leadingAnchor.constraint(equalTo: separatorView.leadingAnchor),
+                horizontalButtonStackView.trailingAnchor.constraint(equalTo: separatorView.trailingAnchor),
                 
-              
+                
             ])
-        }
-        
-        @objc private func addTodoItem() {
-            let newItem = TodoItem(title: "")
-            todoItems.append(newItem)
-            addItemView(newItem)
         }
         
         private func addItemView(_ item: TodoItem) {
@@ -159,60 +171,44 @@ extension NewList {
         }
         
         private func createItemView(_ item: TodoItem) -> UIView {
-            let hStack = UIStackView()
-            hStack.axis = .horizontal
-            hStack.alignment = .center
-            hStack.distribution = .fill
-            hStack.spacing = 8
-            hStack.translatesAutoresizingMaskIntoConstraints = false
-            
-            let checkBox = UIButton(type: .custom)
-            checkBox.setImage(UIImage(systemName: "square"), for: .normal)
-            checkBox.setImage(UIImage(systemName: "checkmark.square"), for: .selected)
-            checkBox.tintColor = .black
-            checkBox.addTarget(self, action: #selector(toggleCheckBox(_:)), for: .touchUpInside)
-            checkBox.widthAnchor.constraint(equalToConstant: 20).isActive = true
-            checkBox.heightAnchor.constraint(equalToConstant: 20).isActive = true
-            checkBox.contentMode = .scaleAspectFit
-            
-            let textField = UITextField()
-            textField.placeholder = "To-do"
-            textField.font = UIFont.systemFont(ofSize: 18)
-            textField.borderStyle = .none
-            textField.returnKeyType = .done
-            textField.text = item.title
-            textField.delegate = self
-            textField.translatesAutoresizingMaskIntoConstraints = false
-
-            hStack.addArrangedSubview(checkBox)
-            hStack.addArrangedSubview(textField)
-            
-            return hStack
+            let itemView = TodoItemView(item: item, delegate: self, checkBoxAction: #selector(toggleCheckBox(_:)), target: self)
+            return itemView
         }
-
-        @objc private func toggleCheckBox(_ sender: UIButton) {
+        
+        private func setupActions() {
+            backButton.addAction(UIAction(handler: { [weak self] _ in
+                guard let self else { return }
+                presenter.back()
+            }), for: .touchUpInside)
+        }
+        
+        // MARK: - OBJC FUNC -
+        
+        @objc
+        private func toggleCheckBox(_ sender: UIButton) {
             sender.isSelected.toggle()
         }
-    }
-}
-
-extension NewList.View: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-}
-
-class TodoItem {
-    var title: String
-    var isCompleted: Bool
-    
-    init(title: String, isCompleted: Bool = false) {
-        self.title = title
-        self.isCompleted = isCompleted
+        
+        @objc
+        private func addTodoItem() {
+            let newItem = TodoItem(title: "")
+            todoItems.append(newItem)
+            addItemView(newItem)
+        }
     }
 }
 
 // MARK: - Extension View -
 
-extension NewList.View: NewListView { }
+extension NewList.View: NewListView, UITextFieldDelegate { 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let itemView = textField.superview as? TodoItemView {
+            itemView.textFieldDidEndEditing(textField)
+        }
+    }
+}

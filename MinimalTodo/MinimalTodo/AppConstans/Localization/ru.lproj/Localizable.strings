@@ -7,3 +7,11 @@
 "pinned" = "Закрепленные";
 "createYourFirstTodoList" = "Создайте свой первый список дел";
 "newList" = "+ Новый список";
+
+//MARK: - Create New List SCREEN LOCALIZATION -
+"title" = "Заголовок";
+"chooseALabel" = "Выберите ярлык";
+"personal" = "Личный";
+"work" = "Работа";
+"finance" = "Финансы";
+"other" = "Другое";

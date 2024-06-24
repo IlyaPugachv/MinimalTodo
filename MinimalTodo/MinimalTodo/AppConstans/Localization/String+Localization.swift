@@ -12,9 +12,16 @@ extension String {
         static var pinned: String { localise("pinned") }
         static var createYourFirstTodoList: String { localise("createYourFirstTodoList") }
         static var newList: String { localise("newList") }
+        
+        //MARK: - New List -
+        static var title: String { localise("title") }
+        static var chooseALabel: String { localise("chooseALabel") }
+        static var personal: String { localise("personal") }
+        static var work: String { localise("work") }
+        static var finance: String { localise("finance") }
+        static var other: String { localise("other") }
     }
 }
-
 
 public func localise(_ key: String) -> String {
     let value = NSLocalizedString(key, comment: "")
