@@ -7,9 +7,10 @@ extension Main {
         
         var presenter: Presenter!
         private lazy var safeArea = self.view.safeAreaLayoutGuide
+        private var todoLists: [TodoList] = []
         
         // MARK: - Subviews -
-  
+        
         private let appMiniIconImageView: UIImageView = .init(image: .applicationMiniIcon)
         private let nameAppLabel: UILabel = .init()
         private let searchImageView: UIImageView = .init()
@@ -42,6 +43,7 @@ extension Main {
         
         public override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
+            updateUI()
         }
         
         // MARK: - Methods -
@@ -77,8 +79,6 @@ extension Main {
             searchImageView.image = UIImage(systemName: "magnifyingglass")
             searchImageView.tintColor = .black
             
-            appImage.contentMode = .scaleAspectFit
-            
             createTodoLabel.text = .Localization.createYourFirstTodoList
             createTodoLabel.font = .interSemibold(of: 20)
             createTodoLabel.textColor = .black
@@ -88,11 +88,12 @@ extension Main {
             newListButton.titleLabel?.font = UIFont.interMedium(of: 14)
             newListButton.backgroundColor = .black
             newListButton.layer.cornerRadius = 15
+            
+            appImage.contentMode = .scaleAspectFit
         }
         
         private func layoutSubviews() {
             NSLayoutConstraint.activate([
-            
                 appMiniIconImageView.topAnchor.constraint(equalTo: safeArea.topAnchor),
                 appMiniIconImageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
                 appMiniIconImageView.widthAnchor.constraint(equalToConstant: 31),
@@ -111,33 +112,110 @@ extension Main {
                 segmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
                 segmentedControl.heightAnchor.constraint(equalToConstant: 47),
                 
-                appImage.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 100),
-                appImage.widthAnchor.constraint(equalToConstant: 384),
-                appImage.heightAnchor.constraint(equalToConstant: 202),
+                appImage.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 50),
+                appImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 
-                createTodoLabel.topAnchor.constraint(equalTo: appImage.bottomAnchor, constant: 110),
-                createTodoLabel.centerXAnchor.constraint(equalTo: appImage.centerXAnchor),
+                createTodoLabel.topAnchor.constraint(equalTo: appImage.bottomAnchor, constant: 20),
+                createTodoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 
                 newListButton.topAnchor.constraint(equalTo: createTodoLabel.bottomAnchor, constant: 25),
-                newListButton.centerXAnchor.constraint(equalTo: appImage.centerXAnchor),
+                newListButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 newListButton.widthAnchor.constraint(equalToConstant: 124),
                 newListButton.heightAnchor.constraint(equalToConstant: 44),
             ])
         }
         
         private func setupActions() {
-            
             newListButton.addAction(UIAction(handler: { [weak self] _ in
                 guard let self else { return }
-                presenter.goToNewListScreen()
+                self.presenter.goToNewListScreen()
             }), for: .touchUpInside)
+        }
+        
+        private func updateUI() {
+            // Очистка существующих представлений
+            for subview in view.subviews {
+                if subview is TodoListView {
+                    subview.removeFromSuperview()
+                }
+            }
+            
+            // Проверка наличия списков задач
+            if todoLists.isEmpty {
+                appImage.isHidden = false
+                createTodoLabel.isHidden = false
+            } else {
+                appImage.isHidden = true
+                createTodoLabel.isHidden = true
+                
+                // Добавление новых представлений
+                var previousView: UIView? = segmentedControl
+                for todoList in todoLists {
+                    let todoListView = TodoListView(todoList: todoList)
+                    view.addSubview(todoListView)
+                    
+                    NSLayoutConstraint.activate([
+                        todoListView.topAnchor.constraint(equalTo: previousView?.bottomAnchor ?? view.topAnchor, constant: 20),
+                        todoListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                        todoListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                    ])
+                    
+                    previousView = todoListView
+                }
+            }
+        }
+        
+        public func addTodoList(_ todoList: TodoList) {
+            todoLists.append(todoList)
+            updateUI()
         }
     }
 }
 
-
-// MARK: - Extension View -
+class TodoListView: UIView {
+    
+    init(todoList: TodoList) {
+        super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        let titleLabel = UILabel()
+        titleLabel.text = todoList.title
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        
+        let dateLabel = UILabel()
+        dateLabel.text = todoList.date
+        dateLabel.font = UIFont.systemFont(ofSize: 14)
+        dateLabel.textColor = .gray
+        
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, dateLabel])
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.spacing = 4
+        
+        addSubview(stackView)
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+        ])
+        
+        backgroundColor = .white
+        layer.cornerRadius = 10
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.1
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowRadius = 4
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
 
 extension Main.View: MainView {
     
 }
+

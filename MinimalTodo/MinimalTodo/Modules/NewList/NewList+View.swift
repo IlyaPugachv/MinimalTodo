@@ -1,12 +1,20 @@
 import UIKit
 
+struct TodoList {
+    var title: String
+    var items: [String]
+    var label: String
+    var date: String
+}
+
 extension NewList {
     class View: UIViewController {
         
         // MARK: - Properties -
         
         var presenter: Presenter!
-        private lazy var safeArea = self.view.safeAreaLayoutGuide
+               private lazy var safeArea = self.view.safeAreaLayoutGuide
+               private var todoLists: [TodoList] = []
         
         // MARK: - Subviews -
         
@@ -178,9 +186,29 @@ extension NewList {
         private func setupActions() {
             backButton.addAction(UIAction(handler: { [weak self] _ in
                 guard let self else { return }
-                presenter.back()
+                self.presenter.back()
+            }), for: .touchUpInside)
+            
+            toggleButton.addAction(UIAction(handler: { [weak self] _ in
+                guard let self else { return }
+                self.saveTodoList()
             }), for: .touchUpInside)
         }
+        
+        private func saveTodoList() {
+            let title = titleTextField.text ?? ""
+            let items = todoItems.map { $0.title }
+            let label = "Personal" // или другая выбранная метка
+            let date = "13-05-2022" // текущая дата или другая дата
+            
+            let newList = TodoList(title: title, items: items, label: label, date: date)
+            todoLists.append(newList)
+            
+            presenter.updateMainView(with: newList)
+            presenter.back()
+        }
+    
+
         
         // MARK: - OBJC FUNC -
         

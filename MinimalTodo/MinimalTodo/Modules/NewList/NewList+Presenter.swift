@@ -1,30 +1,20 @@
-import Foundation
+import UIKit
 
 extension NewList {
     class Presenter {
-        
-        // MARK: - Properties -
-        
-        weak var view: NewListView?
-        
-        // MARK: - Initializers
-        
-        public init() {
-            print(#function, self)
+        weak var view: View?
+        weak var mainPresenter: Main.Presenter?
+
+        init(mainPresenter: Main.Presenter) {
+            self.mainPresenter = mainPresenter
         }
-        
-        deinit {
-            print(#function, self)
-        }
-        
-        // MARK: - Methods -
-        
+
         func back() {
-            view?.pop(animated: true)
+            view?.navigationController?.popViewController(animated: true)
         }
-        
-        // MARK: - Actions -
-        
-        
+
+        func updateMainView(with newList: TodoList) {
+            mainPresenter?.addTodoList(newList)
+        }
     }
 }
