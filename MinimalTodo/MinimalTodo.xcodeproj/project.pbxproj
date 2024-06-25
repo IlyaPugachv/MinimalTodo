@@ -109,7 +109,6 @@
 		BCB94C0F2C220FD1001BA890 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */,
 				BCB94C102C220FED001BA890 /* Main+Presenter.swift */,
 				BCB94C122C220FFE001BA890 /* Main+View.swift */,
 				BCB94C142C221009001BA890 /* MainView.swift */,
@@ -218,6 +217,7 @@
 			children = (
 				BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */,
 				BCB94C4D2C256D46001BA890 /* ToggleButton.swift */,
+				BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */,
 			);
 			path = CommonsView;
 			sourceTree = "<group>";
