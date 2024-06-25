@@ -1,3 +1,4 @@
+
 import UIKit
 
 class TodoListView: UIView {
@@ -69,6 +70,14 @@ class TodoListView: UIView {
             mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
         ])
+        
+        // Add additional fields
+        for field in todoList.additionalFields {
+            let fieldLabel = UILabel()
+            fieldLabel.text = field
+            fieldLabel.font = UIFont.systemFont(ofSize: 14)
+            mainStackView.addArrangedSubview(fieldLabel)
+        }
         
         backgroundColor = .white
         layer.cornerRadius = 10

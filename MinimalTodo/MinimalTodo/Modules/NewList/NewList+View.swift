@@ -4,6 +4,7 @@ struct TodoList {
     var title: String
     var label: String
     var date: String
+    var additionalFields: [String] // Add this line
 }
 
 extension NewList {
@@ -15,6 +16,7 @@ extension NewList {
         private lazy var safeArea = self.view.safeAreaLayoutGuide
         private var todoLists: [TodoList] = []
         private var selectedLabel: String?
+        private var textFields: [UITextField] = []
         
         // MARK: - Subviews -
         
@@ -22,6 +24,9 @@ extension NewList {
         private let toggleButton = ToggleButton()
         
         private let titleTextField: UITextField = .init()
+        private let addTextFieldButton: UIButton = .init()
+        private let textFieldStackView: UIStackView = .init()
+        
         private let plusTodoImageView: UIImageView = .init()
         private let addListButton: UIButton = .init()
         private let stackView: UIStackView = .init()
@@ -83,6 +88,8 @@ extension NewList {
             view.addView(toggleButton)
             view.addView(backButton)
             view.addView(titleTextField)
+            view.addView(addTextFieldButton)
+            view.addView(textFieldStackView)
             view.addView(stackView)
             view.addView(addButtonStack)
             view.addView(chooseLabel)
@@ -106,6 +113,18 @@ extension NewList {
             titleTextField.font = UIFont.systemFont(ofSize: 24, weight: .bold)
             titleTextField.returnKeyType = .done
             titleTextField.delegate = self
+            
+            addTextFieldButton.setTitle("Add", for: .normal)
+            addTextFieldButton.setTitleColor(.white, for: .normal)
+            addTextFieldButton.backgroundColor = .blue
+            addTextFieldButton.layer.cornerRadius = 8
+            addTextFieldButton.translatesAutoresizingMaskIntoConstraints = false
+            addTextFieldButton.addTarget(self, action: #selector(addTextFieldButtonTapped), for: .touchUpInside)
+            
+            textFieldStackView.axis = .vertical
+            textFieldStackView.alignment = .fill
+            textFieldStackView.distribution = .fill
+            textFieldStackView.spacing = 8
             
             stackView.axis = .vertical
             stackView.alignment = .fill
@@ -162,7 +181,15 @@ extension NewList {
                 titleTextField.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
                 titleTextField.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
                 
-                stackView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 20),
+                addTextFieldButton.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 10),
+                addTextFieldButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
+                addTextFieldButton.widthAnchor.constraint(equalToConstant: 100),
+                
+                textFieldStackView.topAnchor.constraint(equalTo: addTextFieldButton.bottomAnchor, constant: 10),
+                textFieldStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
+                textFieldStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+                
+                stackView.topAnchor.constraint(equalTo: textFieldStackView.bottomAnchor, constant: 20),
                 stackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
                 stackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
                 
@@ -188,20 +215,22 @@ extension NewList {
                 buttonStackView.heightAnchor.constraint(equalToConstant: 40),
             ])
         }
-  
+        
         private func setupActions() {
             backButton.addAction(UIAction(handler: { [weak self] _ in
                 guard let self = self else { return }
                 self.presenter.back()
             }), for: .touchUpInside)
         }
- 
+        
         private func saveTodoList() {
             let title = titleTextField.text ?? ""
             let label = selectedLabel ?? "Personal"
             let date = DateFormatter.formattedDate()
             
-            let newList = TodoList(title: title, label: label, date: date)
+            let additionalFields = textFields.map { $0.text ?? "" } // Capture additional fields
+            
+            let newList = TodoList(title: title, label: label, date: date, additionalFields: additionalFields) // Pass additional fields
             todoLists.append(newList)
             
             presenter.updateMainView(with: newList)
@@ -217,18 +246,24 @@ extension NewList {
             sender.backgroundColor = .black
             selectedLabel = sender.title(for: .normal)
         }
+        
+        @objc
+        private func addTextFieldButtonTapped() {
+            let newTextField = UITextField()
+            newTextField.placeholder = "Additional Info"
+            newTextField.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+            newTextField.borderStyle = .roundedRect
+            newTextField.returnKeyType = .done
+            newTextField.delegate = self
+            textFieldStackView.addArrangedSubview(newTextField)
+            textFields.append(newTextField)
+        }
     }
 }
 
-// MARK: - Extension View -
-
-extension NewList.View: NewListView, UITextFieldDelegate {
+    extension NewList.View: NewListView, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    textField.resignFirstResponder()
+    return true
     }
-}
-
-// MARK: - Presenter -
-
-
+    }
