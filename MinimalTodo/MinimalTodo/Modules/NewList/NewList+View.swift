@@ -20,7 +20,6 @@ extension NewList {
         
         private let backButton: UIButton = .init()
         private let toggleButton = ToggleButton()
-        private let saveButton: UIButton = .init()
         
         private let titleTextField: UITextField = .init()
         private let plusTodoImageView: UIImageView = .init()
@@ -64,6 +63,11 @@ extension NewList {
             super.viewWillAppear(animated)
         }
         
+        public override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            saveTodoList()
+        }
+        
         // MARK: - Methods -
         
         private func setup() {
@@ -77,12 +81,10 @@ extension NewList {
             view.backgroundColor = .white
             
             view.addView(toggleButton)
-            view.addView(saveButton)
             view.addView(backButton)
             view.addView(titleTextField)
             view.addView(stackView)
             view.addView(addButtonStack)
-
             view.addView(chooseLabel)
             view.addView(separatorView)
             view.addView(buttonStackView)
@@ -100,12 +102,8 @@ extension NewList {
             let toggleButtonItem = UIBarButtonItem(customView: toggleButton)
             navigationItem.rightBarButtonItem = toggleButtonItem
             
-            titleTextField.placeholder = .Localization.title
-            titleTextField.font = UIFont.systemFont(
-                ofSize: 24,
-                weight: .bold
-            )
-            
+            titleTextField.placeholder = "Title"
+            titleTextField.font = UIFont.systemFont(ofSize: 24, weight: .bold)
             titleTextField.returnKeyType = .done
             titleTextField.delegate = self
             
@@ -113,7 +111,6 @@ extension NewList {
             stackView.alignment = .fill
             stackView.distribution = .fill
             stackView.spacing = 8
-
             
             addButtonStack.axis = .horizontal
             addButtonStack.alignment = .center
@@ -123,8 +120,8 @@ extension NewList {
             addButtonStack.addArrangedSubview(plusTodoImageView)
             addButtonStack.addArrangedSubview(addListButton)
             
-            chooseLabel.text = .Localization.chooseALabel
-            chooseLabel.font = .interSemibold(of: 20)
+            chooseLabel.text = "Choose a Label"
+            chooseLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
             chooseLabel.textColor = .black
             
             separatorView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
@@ -137,10 +134,10 @@ extension NewList {
                 $0.addTarget(self, action: #selector(labelButtonTapped(_:)), for: .touchUpInside)
             }
             
-            helloButton.setTitle(.Localization.personal, for: .normal)
-            byeButton.setTitle(.Localization.work, for: .normal)
-            seeButton.setTitle(.Localization.finance, for: .normal)
-            haveButton.setTitle(.Localization.other, for: .normal)
+            helloButton.setTitle("Personal", for: .normal)
+            byeButton.setTitle("Work", for: .normal)
+            seeButton.setTitle("Finance", for: .normal)
+            haveButton.setTitle("Other", for: .normal)
             
             buttonStackView.axis = .horizontal
             buttonStackView.alignment = .center
@@ -151,23 +148,12 @@ extension NewList {
             buttonStackView.addArrangedSubview(byeButton)
             buttonStackView.addArrangedSubview(seeButton)
             buttonStackView.addArrangedSubview(haveButton)
-            
-            // Настройка saveButton
-            saveButton.setTitle("Сохранить", for: .normal)
-            saveButton.setTitleColor(.white, for: .normal)
-            saveButton.backgroundColor = .black
-            saveButton.layer.cornerRadius = 8
-            saveButton.translatesAutoresizingMaskIntoConstraints = false
         }
         
         private func layoutSubviews() {
             NSLayoutConstraint.activate([
-                
                 toggleButton.topAnchor.constraint(equalTo: safeArea.topAnchor),
-                toggleButton.trailingAnchor.constraint(equalTo: saveButton.leadingAnchor, constant: -10),
-                
-                saveButton.topAnchor.constraint(equalTo: safeArea.topAnchor),
-                saveButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
+                toggleButton.trailingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: -20),
                 
                 backButton.topAnchor.constraint(equalTo: toggleButton.topAnchor),
                 backButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
@@ -205,13 +191,8 @@ extension NewList {
   
         private func setupActions() {
             backButton.addAction(UIAction(handler: { [weak self] _ in
-                guard let self else { return }
+                guard let self = self else { return }
                 self.presenter.back()
-            }), for: .touchUpInside)
-            
-            saveButton.addAction(UIAction(handler: { [weak self] _ in
-                guard let self else { return }
-                self.saveTodoList()
             }), for: .touchUpInside)
         }
  
@@ -224,7 +205,6 @@ extension NewList {
             todoLists.append(newList)
             
             presenter.updateMainView(with: newList)
-            presenter.back()
         }
         
         // MARK: - OBJC FUNC -
@@ -237,7 +217,6 @@ extension NewList {
             sender.backgroundColor = .black
             selectedLabel = sender.title(for: .normal)
         }
-
     }
 }
 
@@ -246,7 +225,10 @@ extension NewList {
 extension NewList.View: NewListView, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        return true;
+        return true
     }
 }
+
+// MARK: - Presenter -
+
 
