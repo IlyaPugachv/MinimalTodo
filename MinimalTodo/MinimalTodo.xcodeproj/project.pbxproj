@@ -30,9 +30,10 @@
 		BCB94C4A2C242D60001BA890 /* NewList+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C492C242D60001BA890 /* NewList+View.swift */; };
 		BCB94C4C2C242D69001BA890 /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C4B2C242D69001BA890 /* NewListView.swift */; };
 		BCB94C4E2C256D46001BA890 /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C4D2C256D46001BA890 /* ToggleButton.swift */; };
-		BCB94C502C257E7E001BA890 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C4F2C257E7E001BA890 /* UIButton+Extensions.swift */; };
 		BCB94C5C2C29C966001BA890 /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C5B2C29C966001BA890 /* DateFormatter+Extensions.swift */; };
 		BCB94C5F2C29D0A7001BA890 /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */; };
+		BCF706242C2C012600EE73A3 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF706232C2C012600EE73A3 /* UILabel+Extensions.swift */; };
+		BCF706262C2C015900EE73A3 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF706252C2C015900EE73A3 /* BackgroundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,9 +63,10 @@
 		BCB94C492C242D60001BA890 /* NewList+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewList+View.swift"; sourceTree = "<group>"; };
 		BCB94C4B2C242D69001BA890 /* NewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
 		BCB94C4D2C256D46001BA890 /* ToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
-		BCB94C4F2C257E7E001BA890 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		BCB94C5B2C29C966001BA890 /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListView.swift; sourceTree = "<group>"; };
+		BCF706232C2C012600EE73A3 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		BCF706252C2C015900EE73A3 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,9 @@
 		BCB94C0F2C220FD1001BA890 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */,
+				BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */,
+				BCF706252C2C015900EE73A3 /* BackgroundView.swift */,
 				BCB94C102C220FED001BA890 /* Main+Presenter.swift */,
 				BCB94C122C220FFE001BA890 /* Main+View.swift */,
 				BCB94C142C221009001BA890 /* MainView.swift */,
@@ -149,7 +154,6 @@
 		BCB94C1A2C22D13E001BA890 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				BCB94C452C233601001BA890 /* CommonsView */,
 				BCB94C1B2C22D145001BA890 /* Extensions */,
 			);
 			path = Common;
@@ -161,8 +165,8 @@
 				BCB94C2D2C22DC07001BA890 /* UIFont+Extensions.swift */,
 				BCB94C2F2C22DF3F001BA890 /* UIView+Extensions.swift */,
 				BCB94C412C22FDCE001BA890 /* UIViewController+Extension.swift */,
-				BCB94C4F2C257E7E001BA890 /* UIButton+Extensions.swift */,
 				BCB94C5B2C29C966001BA890 /* DateFormatter+Extensions.swift */,
+				BCF706232C2C012600EE73A3 /* UILabel+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -212,19 +216,10 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		BCB94C452C233601001BA890 /* CommonsView */ = {
-			isa = PBXGroup;
-			children = (
-				BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */,
-				BCB94C4D2C256D46001BA890 /* ToggleButton.swift */,
-				BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */,
-			);
-			path = CommonsView;
-			sourceTree = "<group>";
-		};
 		BCB94C462C242D20001BA890 /* NewList */ = {
 			isa = PBXGroup;
 			children = (
+				BCB94C4D2C256D46001BA890 /* ToggleButton.swift */,
 				BCB94C472C242D52001BA890 /* NewList+Presenter.swift */,
 				BCB94C492C242D60001BA890 /* NewList+View.swift */,
 				BCB94C4B2C242D69001BA890 /* NewListView.swift */,
@@ -310,6 +305,7 @@
 				BCB94C422C22FDCE001BA890 /* UIViewController+Extension.swift in Sources */,
 				BCB94C132C220FFE001BA890 /* Main+View.swift in Sources */,
 				BCB94C5F2C29D0A7001BA890 /* TodoListView.swift in Sources */,
+				BCF706262C2C015900EE73A3 /* BackgroundView.swift in Sources */,
 				BCB94C5C2C29C966001BA890 /* DateFormatter+Extensions.swift in Sources */,
 				BCB94C402C22E2B2001BA890 /* String+Localization.swift in Sources */,
 				BCB94C152C221009001BA890 /* MainView.swift in Sources */,
@@ -322,8 +318,8 @@
 				BCB94C442C2311CB001BA890 /* CustomSegmentedControl.swift in Sources */,
 				BCB94C242C22D460001BA890 /* OnboardingView.swift in Sources */,
 				BCB94C222C22D451001BA890 /* Onboarding+View.swift in Sources */,
-				BCB94C502C257E7E001BA890 /* UIButton+Extensions.swift in Sources */,
 				BCB94C482C242D52001BA890 /* NewList+Presenter.swift in Sources */,
+				BCF706242C2C012600EE73A3 /* UILabel+Extensions.swift in Sources */,
 				BCB94C4C2C242D69001BA890 /* NewListView.swift in Sources */,
 				BCB94C2E2C22DC07001BA890 /* UIFont+Extensions.swift in Sources */,
 				BCB94C112C220FED001BA890 /* Main+Presenter.swift in Sources */,

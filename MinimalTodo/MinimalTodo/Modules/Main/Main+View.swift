@@ -154,6 +154,9 @@ extension Main {
                     let todoListView = TodoListView(todoList: todoList)
                     view.addSubview(todoListView)
                     
+                    // Don't forget to add this line
+                    todoListView.translatesAutoresizingMaskIntoConstraints = false
+                    
                     NSLayoutConstraint.activate([
                         todoListView.topAnchor.constraint(equalTo: previousView?.bottomAnchor ?? view.topAnchor, constant: 20),
                         todoListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -172,8 +175,6 @@ extension Main {
     }
 }
 
-
-
 extension Main.View: MainView {
-    
+    // Implement MainView methods here
 }
