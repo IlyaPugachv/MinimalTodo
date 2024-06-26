@@ -1,12 +1,5 @@
 import UIKit
 
-struct TodoList {
-    var title: String
-    var label: String
-    var date: String
-    var additionalFields: [String] // Add this line
-}
-
 extension NewList {
     class View: UIViewController {
         
@@ -14,7 +7,9 @@ extension NewList {
         
         var presenter: Presenter!
         private lazy var safeArea = self.view.safeAreaLayoutGuide
+        
         private var todoLists: [TodoList] = []
+        
         private var selectedLabel: String?
         private var textFields: [UITextField] = []
         
@@ -26,6 +21,7 @@ extension NewList {
         private let titleTextField: UITextField = .init()
         private let addTextFieldButton: UIButton = .init()
         private let textFieldStackView: UIStackView = .init()
+        private let containerStackView: UIStackView = .init()
         
         private let plusTodoImageView: UIImageView = .init()
         private let addListButton: UIButton = .init()
@@ -88,8 +84,7 @@ extension NewList {
             view.addView(toggleButton)
             view.addView(backButton)
             view.addView(titleTextField)
-            view.addView(addTextFieldButton)
-            view.addView(textFieldStackView)
+            view.addView(containerStackView)
             view.addView(stackView)
             view.addView(addButtonStack)
             view.addView(chooseLabel)
@@ -114,12 +109,14 @@ extension NewList {
             titleTextField.returnKeyType = .done
             titleTextField.delegate = self
             
-            addTextFieldButton.setTitle("Add", for: .normal)
-            addTextFieldButton.setTitleColor(.white, for: .normal)
-            addTextFieldButton.backgroundColor = .blue
-            addTextFieldButton.layer.cornerRadius = 8
-            addTextFieldButton.translatesAutoresizingMaskIntoConstraints = false
+            addTextFieldButton.setImage(UIImage(systemName: "plus.square"), for: .normal)
+            addTextFieldButton.tintColor = .black
             addTextFieldButton.addTarget(self, action: #selector(addTextFieldButtonTapped), for: .touchUpInside)
+            
+            containerStackView.axis = .vertical
+            containerStackView.alignment = .fill
+            containerStackView.distribution = .fill
+            containerStackView.spacing = 10
             
             textFieldStackView.axis = .vertical
             textFieldStackView.alignment = .fill
@@ -132,7 +129,6 @@ extension NewList {
             stackView.spacing = 8
             
             addButtonStack.axis = .horizontal
-            addButtonStack.alignment = .center
             addButtonStack.distribution = .fill
             addButtonStack.spacing = 8
             
@@ -159,7 +155,6 @@ extension NewList {
             haveButton.setTitle("Other", for: .normal)
             
             buttonStackView.axis = .horizontal
-            buttonStackView.alignment = .center
             buttonStackView.distribution = .fillEqually
             buttonStackView.spacing = 10
             
@@ -167,6 +162,33 @@ extension NewList {
             buttonStackView.addArrangedSubview(byeButton)
             buttonStackView.addArrangedSubview(seeButton)
             buttonStackView.addArrangedSubview(haveButton)
+            
+            containerStackView.axis = .vertical
+                containerStackView.alignment = .fill
+                containerStackView.distribution = .fill
+                containerStackView.spacing = 10
+                
+                textFieldStackView.axis = .vertical
+                textFieldStackView.alignment = .fill
+                textFieldStackView.distribution = .fill
+                textFieldStackView.spacing = 8
+                
+                // Create a horizontal stack for the addTextFieldButton
+                let horizontalStack = UIStackView()
+                horizontalStack.axis = .horizontal
+                horizontalStack.alignment = .fill
+                horizontalStack.distribution = .fill
+                horizontalStack.spacing = 0
+                
+                // Add the button to the horizontal stack
+                horizontalStack.addArrangedSubview(addTextFieldButton)
+                
+                // Add a spacer view to the right of the button
+                let spacerView = UIView()
+                horizontalStack.addArrangedSubview(spacerView)
+                
+                containerStackView.addArrangedSubview(textFieldStackView)
+                containerStackView.addArrangedSubview(horizontalStack)
         }
         
         private func layoutSubviews() {
@@ -181,15 +203,16 @@ extension NewList {
                 titleTextField.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
                 titleTextField.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
                 
-                addTextFieldButton.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 10),
-                addTextFieldButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
-                addTextFieldButton.widthAnchor.constraint(equalToConstant: 100),
+                containerStackView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 10),
+                containerStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
+                containerStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
+
                 
-                textFieldStackView.topAnchor.constraint(equalTo: addTextFieldButton.bottomAnchor, constant: 10),
-                textFieldStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
-                textFieldStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
                 
-                stackView.topAnchor.constraint(equalTo: textFieldStackView.bottomAnchor, constant: 20),
+                textFieldStackView.leadingAnchor.constraint(equalTo: containerStackView.leadingAnchor, constant: 10),
+                textFieldStackView.trailingAnchor.constraint(equalTo: containerStackView.trailingAnchor, constant: -10),
+
+                stackView.topAnchor.constraint(equalTo: containerStackView.bottomAnchor, constant: 20),
                 stackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
                 stackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
                 
@@ -261,9 +284,10 @@ extension NewList {
     }
 }
 
-    extension NewList.View: NewListView, UITextFieldDelegate {
+extension NewList.View: NewListView, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
-    return true
+        textField.resignFirstResponder()
+        return true
     }
-    }
+}
+

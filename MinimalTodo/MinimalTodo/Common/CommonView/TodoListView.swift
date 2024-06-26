@@ -26,9 +26,7 @@ class TodoListView: UIView {
         mainStackView.alignment = .leading
         mainStackView.spacing = 4
         
-        addSubview(mainStackView)
-        
-        mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        addView(mainStackView)
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
@@ -48,8 +46,7 @@ class TodoListView: UIView {
         layer.shadowOffset = CGSize(width: 0, height: 2)
         layer.shadowRadius = 4
         
-        // Don't forget to add this line
-        translatesAutoresizingMaskIntoConstraints = false
+        
     }
     
     required init?(coder: NSCoder) {

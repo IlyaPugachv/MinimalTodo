@@ -34,6 +34,7 @@
 		BCB94C5F2C29D0A7001BA890 /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */; };
 		BCF706242C2C012600EE73A3 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF706232C2C012600EE73A3 /* UILabel+Extensions.swift */; };
 		BCF706262C2C015900EE73A3 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF706252C2C015900EE73A3 /* BackgroundView.swift */; };
+		BCF7062A2C2C095D00EE73A3 /* TodoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF706292C2C095D00EE73A3 /* TodoList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListView.swift; sourceTree = "<group>"; };
 		BCF706232C2C012600EE73A3 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		BCF706252C2C015900EE73A3 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		BCF706292C2C095D00EE73A3 /* TodoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,9 +113,6 @@
 		BCB94C0F2C220FD1001BA890 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */,
-				BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */,
-				BCF706252C2C015900EE73A3 /* BackgroundView.swift */,
 				BCB94C102C220FED001BA890 /* Main+Presenter.swift */,
 				BCB94C122C220FFE001BA890 /* Main+View.swift */,
 				BCB94C142C221009001BA890 /* MainView.swift */,
@@ -154,6 +153,8 @@
 		BCB94C1A2C22D13E001BA890 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BCF706282C2C094600EE73A3 /* Model */,
+				BCF706272C2C090E00EE73A3 /* CommonView */,
 				BCB94C1B2C22D145001BA890 /* Extensions */,
 			);
 			path = Common;
@@ -219,12 +220,30 @@
 		BCB94C462C242D20001BA890 /* NewList */ = {
 			isa = PBXGroup;
 			children = (
-				BCB94C4D2C256D46001BA890 /* ToggleButton.swift */,
 				BCB94C472C242D52001BA890 /* NewList+Presenter.swift */,
 				BCB94C492C242D60001BA890 /* NewList+View.swift */,
 				BCB94C4B2C242D69001BA890 /* NewListView.swift */,
 			);
 			path = NewList;
+			sourceTree = "<group>";
+		};
+		BCF706272C2C090E00EE73A3 /* CommonView */ = {
+			isa = PBXGroup;
+			children = (
+				BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */,
+				BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */,
+				BCF706252C2C015900EE73A3 /* BackgroundView.swift */,
+				BCB94C4D2C256D46001BA890 /* ToggleButton.swift */,
+			);
+			path = CommonView;
+			sourceTree = "<group>";
+		};
+		BCF706282C2C094600EE73A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BCF706292C2C095D00EE73A3 /* TodoList.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCB94C422C22FDCE001BA890 /* UIViewController+Extension.swift in Sources */,
+				BCF7062A2C2C095D00EE73A3 /* TodoList.swift in Sources */,
 				BCB94C132C220FFE001BA890 /* Main+View.swift in Sources */,
 				BCB94C5F2C29D0A7001BA890 /* TodoListView.swift in Sources */,
 				BCF706262C2C015900EE73A3 /* BackgroundView.swift in Sources */,
