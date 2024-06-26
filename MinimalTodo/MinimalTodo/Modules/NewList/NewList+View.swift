@@ -19,7 +19,9 @@ extension NewList {
         private let toggleButton = ToggleButton()
         
         private let titleTextField: UITextField = .init()
-        private let addTextFieldButton: UIButton = .init()
+        
+        private let addTextFieldButton = UIButton()
+        
         private let textFieldStackView: UIStackView = .init()
         private let containerStackView: UIStackView = .init()
         
@@ -31,11 +33,10 @@ extension NewList {
         private var separatorView: UIView = .init()
         private let chooseLabel: UILabel = .init()
         
-        private let helloButton: UIButton = .init()
-        private let byeButton: UIButton = .init()
-        private let seeButton: UIButton = .init()
-        private let haveButton: UIButton = .init()
-        
+        private let personalButton: UIButton = .init()
+        private let workButton: UIButton = .init()
+        private let financeButton: UIButton = .init()
+        private let otherButton: UIButton = .init()
         private let buttonStackView: UIStackView = .init()
         
         // MARK: - Initializers -
@@ -94,101 +95,111 @@ extension NewList {
         
         private func configureSubviews() {
             
-            backButton.setImage(UIImage(named: "custom_back_arrow"), for: .normal)
+            backButton.setImage(
+                named: "custom_back_arrow",
+                for: .normal
+            )
             
-            let backButtonItem = UIBarButtonItem(customView: backButton)
-            navigationItem.leftBarButtonItem = backButtonItem
+            configureBackButton()
+            configureRightBarButton()
             
-            navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+            titleTextField.configureTextField(
+                placeholder: .Localization.title,
+                font: .interSemibold(of: 24),
+                returnKeyType: .done,
+                delegate: self)
             
-            let toggleButtonItem = UIBarButtonItem(customView: toggleButton)
-            navigationItem.rightBarButtonItem = toggleButtonItem
+            addTextFieldButton.setImage(
+                named: "plus",
+                for: .normal
+            )
+
+            containerStackView.setupVerticalStackView(
+                spacing: 10,
+                alignment: .fill,
+                distribution: .fill
+            )
             
-            titleTextField.placeholder = "Title"
-            titleTextField.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-            titleTextField.returnKeyType = .done
-            titleTextField.delegate = self
+            textFieldStackView.setupVerticalStackView(
+                spacing: 8,
+                alignment: .fill,
+                distribution: .fill
+            )
             
-            addTextFieldButton.setImage(UIImage(systemName: "plus.square"), for: .normal)
-            addTextFieldButton.tintColor = .black
-            addTextFieldButton.addTarget(self, action: #selector(addTextFieldButtonTapped), for: .touchUpInside)
+            stackView.setupVerticalStackView(
+                spacing: 8,
+                alignment: .fill,
+                distribution: .fill
+            )
             
-            containerStackView.axis = .vertical
-            containerStackView.alignment = .fill
-            containerStackView.distribution = .fill
-            containerStackView.spacing = 10
-            
-            textFieldStackView.axis = .vertical
-            textFieldStackView.alignment = .fill
-            textFieldStackView.distribution = .fill
-            textFieldStackView.spacing = 8
-            
-            stackView.axis = .vertical
-            stackView.alignment = .fill
-            stackView.distribution = .fill
-            stackView.spacing = 8
-            
-            addButtonStack.axis = .horizontal
-            addButtonStack.distribution = .fill
-            addButtonStack.spacing = 8
+            addButtonStack.setupHorizontalStackView(
+                spacing: 8,
+                distribution: .fill
+            )
             
             addButtonStack.addArrangedSubview(plusTodoImageView)
             addButtonStack.addArrangedSubview(addListButton)
-            
-            chooseLabel.text = "Choose a Label"
-            chooseLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-            chooseLabel.textColor = .black
+
+            chooseLabel.configureLabel(
+                text: .Localization.chooseALabel,
+                font: .interMedium(of: 20), 
+                color: .black
+            )
             
             separatorView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
             
-            [helloButton, byeButton, seeButton, haveButton].forEach {
+            [personalButton, workButton, financeButton, otherButton].forEach {
                 $0.setTitleColor(.white, for: .normal)
                 $0.backgroundColor = .lightGray
-                $0.layer.cornerRadius = 8
-                $0.translatesAutoresizingMaskIntoConstraints = false
+                $0.layer.cornerRadius = 6
                 $0.addTarget(self, action: #selector(labelButtonTapped(_:)), for: .touchUpInside)
             }
+
+            personalButton.setTitle(
+                .Localization.personal,
+                for: .normal
+            )
             
-            helloButton.setTitle("Personal", for: .normal)
-            byeButton.setTitle("Work", for: .normal)
-            seeButton.setTitle("Finance", for: .normal)
-            haveButton.setTitle("Other", for: .normal)
+            workButton.setTitle(
+                .Localization.work,
+                for: .normal
+            )
             
-            buttonStackView.axis = .horizontal
-            buttonStackView.distribution = .fillEqually
-            buttonStackView.spacing = 10
+            financeButton.setTitle(
+                .Localization.finance,
+                for: .normal
+            )
             
-            buttonStackView.addArrangedSubview(helloButton)
-            buttonStackView.addArrangedSubview(byeButton)
-            buttonStackView.addArrangedSubview(seeButton)
-            buttonStackView.addArrangedSubview(haveButton)
+            otherButton.setTitle(
+                .Localization.other,
+                for: .normal
+            )
+         
+            buttonStackView.setupHorizontalStackView(
+                spacing: 10,
+                distribution: .fillEqually
+            )
             
-            containerStackView.axis = .vertical
-                containerStackView.alignment = .fill
-                containerStackView.distribution = .fill
-                containerStackView.spacing = 10
-                
-                textFieldStackView.axis = .vertical
-                textFieldStackView.alignment = .fill
-                textFieldStackView.distribution = .fill
-                textFieldStackView.spacing = 8
-                
-                // Create a horizontal stack for the addTextFieldButton
-                let horizontalStack = UIStackView()
-                horizontalStack.axis = .horizontal
-                horizontalStack.alignment = .fill
-                horizontalStack.distribution = .fill
-                horizontalStack.spacing = 0
-                
-                // Add the button to the horizontal stack
-                horizontalStack.addArrangedSubview(addTextFieldButton)
-                
-                // Add a spacer view to the right of the button
-                let spacerView = UIView()
-                horizontalStack.addArrangedSubview(spacerView)
-                
-                containerStackView.addArrangedSubview(textFieldStackView)
-                containerStackView.addArrangedSubview(horizontalStack)
+            buttonStackView.addArrangedSubview(personalButton)
+            buttonStackView.addArrangedSubview(workButton)
+            buttonStackView.addArrangedSubview(financeButton)
+            buttonStackView.addArrangedSubview(otherButton)
+            
+            let horizontalStack = UIStackView()
+            
+            horizontalStack.setupHorizontalStackView(
+                spacing: 0,
+                alignment: .fill,
+                distribution: .fill
+            )
+            
+            horizontalStack.addArrangedSubview(addTextFieldButton)
+  
+            let spacerView = UIView()
+            horizontalStack.addArrangedSubview(spacerView)
+            
+            containerStackView.addArrangedSubview(textFieldStackView)
+            containerStackView.addArrangedSubview(horizontalStack)
         }
         
         private func layoutSubviews() {
@@ -206,12 +217,10 @@ extension NewList {
                 containerStackView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 10),
                 containerStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
                 containerStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
-
-                
-                
+  
                 textFieldStackView.leadingAnchor.constraint(equalTo: containerStackView.leadingAnchor, constant: 10),
                 textFieldStackView.trailingAnchor.constraint(equalTo: containerStackView.trailingAnchor, constant: -10),
-
+                
                 stackView.topAnchor.constraint(equalTo: containerStackView.bottomAnchor, constant: 20),
                 stackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
                 stackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
@@ -232,14 +241,37 @@ extension NewList {
                 chooseLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 20),
                 chooseLabel.leadingAnchor.constraint(equalTo: separatorView.leadingAnchor),
                 
-                buttonStackView.topAnchor.constraint(equalTo: chooseLabel.bottomAnchor, constant: 10),
+                buttonStackView.topAnchor.constraint(equalTo: chooseLabel.bottomAnchor, constant: 20),
                 buttonStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
                 buttonStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
-                buttonStackView.heightAnchor.constraint(equalToConstant: 40),
+                buttonStackView.heightAnchor.constraint(equalToConstant: 28),
             ])
         }
         
+        private func configureBackButton() {
+            
+            let backButtonItem = UIBarButtonItem(customView: backButton)
+            
+            navigationItem.leftBarButtonItem = backButtonItem
+            
+            navigationItem.backBarButtonItem = UIBarButtonItem(
+                title: "",
+                style: .plain,
+                target: nil,
+                action: nil)
+        }
+        
+        private func configureRightBarButton() {
+            let toggleButtonItem = UIBarButtonItem(customView: toggleButton)
+            navigationItem.rightBarButtonItem = toggleButtonItem
+        }
+        
         private func setupActions() {
+            
+            addTextFieldButton.addTarget(self,
+                                         action: #selector(addTextFieldButtonTapped),
+                                         for: .touchUpInside)
+            
             backButton.addAction(UIAction(handler: { [weak self] _ in
                 guard let self = self else { return }
                 self.presenter.back()
@@ -248,12 +280,12 @@ extension NewList {
         
         private func saveTodoList() {
             let title = titleTextField.text ?? ""
-            let label = selectedLabel ?? "Personal"
+            let label = selectedLabel ?? .Localization.personal
             let date = DateFormatter.formattedDate()
             
-            let additionalFields = textFields.map { $0.text ?? "" } // Capture additional fields
+            let additionalFields = textFields.map { $0.text ?? "" }
             
-            let newList = TodoList(title: title, label: label, date: date, additionalFields: additionalFields) // Pass additional fields
+            let newList = TodoList(title: title, label: label, date: date, additionalFields: additionalFields)
             todoLists.append(newList)
             
             presenter.updateMainView(with: newList)
@@ -263,7 +295,7 @@ extension NewList {
         
         @objc
         private func labelButtonTapped(_ sender: UIButton) {
-            [helloButton, byeButton, seeButton, haveButton].forEach {
+            [personalButton, workButton, financeButton, otherButton].forEach {
                 $0.backgroundColor = .lightGray
             }
             sender.backgroundColor = .black

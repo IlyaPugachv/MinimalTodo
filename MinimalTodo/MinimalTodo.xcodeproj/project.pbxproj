@@ -35,6 +35,9 @@
 		BCF706242C2C012600EE73A3 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF706232C2C012600EE73A3 /* UILabel+Extensions.swift */; };
 		BCF706262C2C015900EE73A3 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF706252C2C015900EE73A3 /* BackgroundView.swift */; };
 		BCF7062A2C2C095D00EE73A3 /* TodoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF706292C2C095D00EE73A3 /* TodoList.swift */; };
+		BCF7062C2C2C1B5700EE73A3 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF7062B2C2C1B5700EE73A3 /* UIButton+Extensions.swift */; };
+		BCF7062E2C2C318400EE73A3 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF7062D2C2C318400EE73A3 /* UIStackView+Extensions.swift */; };
+		BCF706302C2C385E00EE73A3 /* TextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF7062F2C2C385E00EE73A3 /* TextField+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +72,9 @@
 		BCF706232C2C012600EE73A3 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		BCF706252C2C015900EE73A3 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		BCF706292C2C095D00EE73A3 /* TodoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoList.swift; sourceTree = "<group>"; };
+		BCF7062B2C2C1B5700EE73A3 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		BCF7062D2C2C318400EE73A3 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
+		BCF7062F2C2C385E00EE73A3 /* TextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +174,9 @@
 				BCB94C412C22FDCE001BA890 /* UIViewController+Extension.swift */,
 				BCB94C5B2C29C966001BA890 /* DateFormatter+Extensions.swift */,
 				BCF706232C2C012600EE73A3 /* UILabel+Extensions.swift */,
+				BCF7062B2C2C1B5700EE73A3 /* UIButton+Extensions.swift */,
+				BCF7062D2C2C318400EE73A3 /* UIStackView+Extensions.swift */,
+				BCF7062F2C2C385E00EE73A3 /* TextField+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -322,6 +331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCB94C422C22FDCE001BA890 /* UIViewController+Extension.swift in Sources */,
+				BCF7062C2C2C1B5700EE73A3 /* UIButton+Extensions.swift in Sources */,
 				BCF7062A2C2C095D00EE73A3 /* TodoList.swift in Sources */,
 				BCB94C132C220FFE001BA890 /* Main+View.swift in Sources */,
 				BCB94C5F2C29D0A7001BA890 /* TodoListView.swift in Sources */,
@@ -329,6 +339,7 @@
 				BCB94C5C2C29C966001BA890 /* DateFormatter+Extensions.swift in Sources */,
 				BCB94C402C22E2B2001BA890 /* String+Localization.swift in Sources */,
 				BCB94C152C221009001BA890 /* MainView.swift in Sources */,
+				BCF7062E2C2C318400EE73A3 /* UIStackView+Extensions.swift in Sources */,
 				BCB94C4E2C256D46001BA890 /* ToggleButton.swift in Sources */,
 				BCB94C302C22DF3F001BA890 /* UIView+Extensions.swift in Sources */,
 				BCB94BCC2C21F7AB001BA890 /* AppDelegate.swift in Sources */,
@@ -343,6 +354,7 @@
 				BCB94C4C2C242D69001BA890 /* NewListView.swift in Sources */,
 				BCB94C2E2C22DC07001BA890 /* UIFont+Extensions.swift in Sources */,
 				BCB94C112C220FED001BA890 /* Main+Presenter.swift in Sources */,
+				BCF706302C2C385E00EE73A3 /* TextField+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
