@@ -142,7 +142,7 @@ extension NewList {
 
             chooseLabel.configureLabel(
                 text: .Localization.chooseALabel,
-                font: .interMedium(of: 20), 
+                font: .interMedium(of: 20),
                 color: .black
             )
             
@@ -304,14 +304,49 @@ extension NewList {
         
         @objc
         private func addTextFieldButtonTapped() {
-            let newTextField = UITextField()
-            newTextField.placeholder = "Additional Info"
-            newTextField.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-            newTextField.borderStyle = .roundedRect
-            newTextField.returnKeyType = .done
-            newTextField.delegate = self
-            textFieldStackView.addArrangedSubview(newTextField)
-            textFields.append(newTextField)
+            let newTextFieldView = createTextFieldView()
+            textFieldStackView.addArrangedSubview(newTextFieldView)
+        }
+        
+        private func createTextFieldView() -> UIView {
+            let view = UIView()
+           
+            
+            let checkbox = UIButton()
+            checkbox.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
+            checkbox.setImage(UIImage(systemName: "square"), for: .normal)
+            checkbox.addTarget(self, action: #selector(checkboxTapped(_:)), for: .touchUpInside)
+           
+            
+            let textField = UITextField()
+            textField.placeholder = "Additional Info"
+            textField.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+            textField.borderStyle = .roundedRect
+            textField.returnKeyType = .done
+            textField.delegate = self
+            
+            
+            view.addView(checkbox)
+            view.addView(textField)
+            
+            NSLayoutConstraint.activate([
+                checkbox.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                checkbox.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+                checkbox.widthAnchor.constraint(equalToConstant: 24),
+                checkbox.heightAnchor.constraint(equalToConstant: 24),
+                
+                textField.leadingAnchor.constraint(equalTo: checkbox.trailingAnchor, constant: 8),
+                textField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                textField.topAnchor.constraint(equalTo: view.topAnchor),
+                textField.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            ])
+            
+            return view
+        }
+        
+        @objc
+        private func checkboxTapped(_ sender: UIButton) {
+            sender.isSelected.toggle()
         }
     }
 }
