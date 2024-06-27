@@ -311,13 +311,11 @@ extension NewList {
         private func createTextFieldView() -> UIView {
             let view = UIView()
            
-            
             let checkbox = UIButton()
             checkbox.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
             checkbox.setImage(UIImage(systemName: "square"), for: .normal)
             checkbox.addTarget(self, action: #selector(checkboxTapped(_:)), for: .touchUpInside)
            
-            
             let textField = UITextField()
             textField.placeholder = "Additional Info"
             textField.font = UIFont.systemFont(ofSize: 18, weight: .regular)
@@ -325,6 +323,7 @@ extension NewList {
             textField.returnKeyType = .done
             textField.delegate = self
             
+            textFields.append(textField)
             
             view.addView(checkbox)
             view.addView(textField)

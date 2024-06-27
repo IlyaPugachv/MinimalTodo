@@ -16,6 +16,12 @@ extension UIImageView {
     }
 }
 
+extension UIImageView {
+    func setCustomImage(named imageName: String) {
+        self.image = UIImage(named: imageName)
+    }
+}
+
 extension UIStackView {
     static func createStackView(axis: NSLayoutConstraint.Axis, spacing: CGFloat, alignment: UIStackView.Alignment) -> UIStackView {
         let stackView = UIStackView()

@@ -1,55 +1,112 @@
 import UIKit
 
-class TodoListView: UIView {
+final class TodoListView: UIView {
+
+    // MARK: - Properties -
     
-    init(todoList: TodoList) {
-        super.init(frame: .zero)
+    private let todoList: TodoList
+    
+//    private let customColors: [UIColor] = [.red, .green, .blue]
+    
+    // MARK: - Subviews -
+    
+    private let headerLabel = UILabel()
+    private let dateLabel = UILabel()
+    private let calendarImageView = UIImageView()
+    private let blackView: BackgroundView
+    private let dateStackView = UIStackView()
+    private let labelsStackView = UIStackView()
+    private let mainStackView = UIStackView()
+    
+    // MARK: - Initializers -
+    
+    init(todoList: TodoList, frame: CGRect = .zero) {
+        self.todoList = todoList
+        self.blackView = BackgroundView(text: todoList.label)
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Methods
+    
+    private func setup() {
+        buildHierarchy()
+        configureSubviews()
+        setupLayoutSubviews()
+        setupActions()
         
-        let headerLabel = UILabel.createLabel(text: todoList.title, font: UIFont.boldSystemFont(ofSize: 18))
+//        self.backgroundColor = customColors.randomElement()
+    }
+    
+    private func buildHierarchy() {
+        addView(mainStackView)
+        mainStackView.addArrangedSubview(headerLabel)
         
-        let dateLabel = UILabel.createLabel(text: todoList.date, font: UIFont.systemFont(ofSize: 8), textColor: .gray)
+        for field in todoList.additionalFields {
+            let fieldLabel = UILabel()
+            
+            fieldLabel.configureLabel(
+                text: field,
+                font: .interSemibold(of: 14),
+                color: .black)
+            
+            mainStackView.addArrangedSubview(fieldLabel)
+        }
         
-        let calendarImageView = UIImageView.createImageView(systemName: "calendar")
+        mainStackView.addArrangedSubview(labelsStackView)
+    }
+    
+    private func configureSubviews() {
         
-        let blackView = BackgroundView(text: todoList.label)
+        headerLabel.configureLabel(
+            text: todoList.title,
+            font: .interMedium(of: 20),
+            color: .black
+        )
         
-        let dateStackView = UIStackView.createStackView(axis: .horizontal, spacing: 4, alignment: .center)
+        dateLabel.configureLabel(
+            text: todoList.date,
+            font: .interSemibold(of: 8),
+            color: .black
+        )
+        
+        calendarImageView.setCustomImage(
+            named: "calendar")
+        
+        dateStackView.setupHorizontalStackView(
+            spacing: 4,
+            alignment: .center
+        )
+        
         dateStackView.addArrangedSubview(calendarImageView)
         dateStackView.addArrangedSubview(dateLabel)
         
-        let labelsStackView = UIStackView(arrangedSubviews: [blackView, dateStackView])
-        labelsStackView.axis = .horizontal
-        labelsStackView.spacing = 10
+        labelsStackView.setupHorizontalStackView(
+            spacing: 10)
         
-        let mainStackView = UIStackView(arrangedSubviews: [headerLabel, labelsStackView])
-        mainStackView.axis = .vertical
-        mainStackView.alignment = .leading
-        mainStackView.spacing = 4
+        labelsStackView.addArrangedSubview(blackView)
+        labelsStackView.addArrangedSubview(dateStackView)
         
-        addView(mainStackView)
+        mainStackView.setupVerticalStackView(
+            spacing: 4,
+            alignment: .leading
+        )
+    }
+    
+    private func setupLayoutSubviews() {
+        
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
         ])
-        
-        for field in todoList.additionalFields {
-            let fieldLabel = UILabel.createLabel(text: field, font: UIFont.systemFont(ofSize: 14))
-            mainStackView.addArrangedSubview(fieldLabel)
-        }
-        
-        backgroundColor = .white
-        layer.cornerRadius = 10
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.1
-        layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowRadius = 4
-        
-        
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private func setupActions() {
     }
 }
