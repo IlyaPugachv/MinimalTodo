@@ -6,8 +6,6 @@ final class TodoListView: UIView {
     
     private let todoList: TodoList
     
-//    private let customColors: [UIColor] = [.red, .green, .blue]
-    
     // MARK: - Subviews -
     
     private let headerLabel = UILabel()
@@ -39,7 +37,8 @@ final class TodoListView: UIView {
         setupLayoutSubviews()
         setupActions()
         
-//        self.backgroundColor = customColors.randomElement()
+        // Apply random background color from UIColor.Colors
+        self.backgroundColor = UIColor.Colors.randomColor()
     }
     
     private func buildHierarchy() {
@@ -107,6 +106,17 @@ final class TodoListView: UIView {
         ])
     }
     
-    private func setupActions() {
+    private func setupActions() { }
+}
+
+extension UIColor.Colors {
+    static func randomColor() -> UIColor {
+        let colors: [UIColor] = [
+            UIColor.Colors.yellow,
+            UIColor.Colors.green,
+            UIColor.Colors.violet,
+            UIColor.Colors.red
+        ]
+        return colors.randomElement() ?? .clear
     }
 }
