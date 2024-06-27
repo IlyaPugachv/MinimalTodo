@@ -39,6 +39,7 @@ extension Main {
         public override func viewDidLoad() {
             super.viewDidLoad()
             setup()
+            loadTodoListsFromUserDefaults()
         }
         
         public override func viewWillAppear(_ animated: Bool) {
@@ -67,29 +68,32 @@ extension Main {
         }
         
         private func configureSubviews() {
-            
             navigationItem.hidesBackButton = true
             
             appMiniIconImageView.contentMode = .scaleAspectFit
             
-            nameAppLabel.text = "MinimalTodo"
-            nameAppLabel.font = .interSemibold(of: 20)
-            nameAppLabel.textColor = .black
+            nameAppLabel.configureLabel(
+                text: "MinimalTodo",
+                font: .interSemibold(of: 20),
+                color: .black
+            )
             
             searchImageView.image = UIImage(systemName: "magnifyingglass")
+            
             searchImageView.tintColor = .black
+
+            createTodoLabel.configureLabel(
+                text: .Localization.createYourFirstTodoList,
+                font: .interSemibold(of: 20),
+                color: .black
+            )
             
-            createTodoLabel.text = .Localization.createYourFirstTodoList
-            createTodoLabel.font = .interSemibold(of: 20)
-            createTodoLabel.textColor = .black
-            
-            newListButton.setTitle(.Localization.newList, for: .normal)
-            newListButton.setTitleColor(.white, for: .normal)
-            newListButton.titleLabel?.font = UIFont.interMedium(of: 14)
             newListButton.backgroundColor = .black
-            newListButton.layer.cornerRadius = 15
+            newListButton.layer.cornerRadius = 32.5
             
-            appImage.contentMode = .scaleAspectFit
+            let plusImage = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate)
+            newListButton.setImage(plusImage, for: .normal)
+            newListButton.tintColor = .white
         }
         
         private func layoutSubviews() {
@@ -98,7 +102,7 @@ extension Main {
                 appMiniIconImageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
                 appMiniIconImageView.widthAnchor.constraint(equalToConstant: 31),
                 appMiniIconImageView.heightAnchor.constraint(equalToConstant: 26),
-            
+                
                 nameAppLabel.topAnchor.constraint(equalTo: appMiniIconImageView.topAnchor),
                 nameAppLabel.leadingAnchor.constraint(equalTo: appMiniIconImageView.trailingAnchor, constant: 10),
                 
@@ -115,47 +119,42 @@ extension Main {
                 appImage.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 50),
                 appImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 
-                createTodoLabel.topAnchor.constraint(equalTo: appImage.bottomAnchor, constant: 20),
+                createTodoLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -160),
                 createTodoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 
                 newListButton.topAnchor.constraint(equalTo: createTodoLabel.bottomAnchor, constant: 25),
                 newListButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                newListButton.widthAnchor.constraint(equalToConstant: 124),
-                newListButton.heightAnchor.constraint(equalToConstant: 44),
+                newListButton.widthAnchor.constraint(equalToConstant: 65),
+                newListButton.heightAnchor.constraint(equalToConstant: 65),
             ])
         }
         
         private func setupActions() {
             newListButton.addAction(UIAction(handler: { [weak self] _ in
-                guard let self else { return }
+                guard let self = self else { return }
                 self.presenter.goToNewListScreen()
             }), for: .touchUpInside)
         }
         
         private func updateUI() {
-            // Очистка существующих представлений
-            for subview in view.subviews {
+          
+            view.subviews.forEach { subview in
                 if subview is TodoListView {
                     subview.removeFromSuperview()
                 }
             }
             
-            // Проверка наличия списков задач
             if todoLists.isEmpty {
                 appImage.isHidden = false
                 createTodoLabel.isHidden = false
             } else {
                 appImage.isHidden = true
                 createTodoLabel.isHidden = true
-                
-                // Добавление новых представлений
+         
                 var previousView: UIView? = segmentedControl
                 for todoList in todoLists {
                     let todoListView = TodoListView(todoList: todoList)
-                    view.addSubview(todoListView)
-                    
-                    // Don't forget to add this line
-                    todoListView.translatesAutoresizingMaskIntoConstraints = false
+                    view.addView(todoListView)
                     
                     NSLayoutConstraint.activate([
                         todoListView.topAnchor.constraint(equalTo: previousView?.bottomAnchor ?? view.topAnchor, constant: 20),
@@ -167,14 +166,29 @@ extension Main {
                 }
             }
         }
+
+        private func loadTodoListsFromUserDefaults() {
+            if let savedData = UserDefaults.standard.data(forKey: "TodoLists") {
+                let decoder = JSONDecoder()
+                if let loadedLists = try? decoder.decode([TodoList].self, from: savedData) {
+                    todoLists = loadedLists
+                }
+            }
+        }
         
         public func addTodoList(_ todoList: TodoList) {
             todoLists.append(todoList)
             updateUI()
+            saveTodoListsToUserDefaults()
+        }
+        
+        private func saveTodoListsToUserDefaults() {
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(todoLists) {
+                UserDefaults.standard.set(encoded, forKey: "TodoLists")
+            }
         }
     }
 }
 
-extension Main.View: MainView {
-    // Implement MainView methods here
-}
+extension Main.View: MainView { }

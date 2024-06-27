@@ -282,13 +282,23 @@ extension NewList {
             let title = titleTextField.text ?? ""
             let label = selectedLabel ?? .Localization.personal
             let date = DateFormatter.formattedDate()
-            
+
             let additionalFields = textFields.map { $0.text ?? "" }
-            
+
             let newList = TodoList(title: title, label: label, date: date, additionalFields: additionalFields)
             todoLists.append(newList)
+
+            // Сохранение в UserDefaults
+            saveTodoListToUserDefaults()
             
             presenter.updateMainView(with: newList)
+        }
+
+        private func saveTodoListToUserDefaults() {
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(todoLists) {
+                UserDefaults.standard.set(encoded, forKey: "TodoLists")
+            }
         }
         
         // MARK: - OBJC FUNC -

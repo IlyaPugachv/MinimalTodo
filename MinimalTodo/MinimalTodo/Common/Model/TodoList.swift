@@ -1,6 +1,6 @@
 import Foundation
 
-struct TodoList {
+struct TodoList: Codable {
     var title: String
     var label: String
     var date: String
