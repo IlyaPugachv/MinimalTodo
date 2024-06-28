@@ -193,7 +193,7 @@ extension Main {
 
 extension Main.View: MainView, TodoListViewDelegate {
     func todoListViewDidSwipeToDelete(_ todoListView: TodoListView) {
-        guard let index = todoLists.firstIndex(where: { $0.title == todoListView.todoList.title }) else { return }
+        guard let index = todoLists.firstIndex(where: { $0.id == todoListView.todoList.id }) else { return }
         
         todoListView.animateDeletion { [weak self] in
             guard let self = self else { return }

@@ -1,11 +1,20 @@
 import UIKit
 
 struct TodoList: Codable {
+    let id: UUID
     var title: String
     var label: String
     var date: String
     var additionalFields: [String]
     var colorIdentifier: String?
+    
+    init(title: String, label: String, date: String, additionalFields: [String]) {
+        self.id = UUID()
+        self.title = title
+        self.label = label
+        self.date = date
+        self.additionalFields = additionalFields
+    }
     
     mutating func assignRandomColor() {
         guard colorIdentifier == nil else { return }
