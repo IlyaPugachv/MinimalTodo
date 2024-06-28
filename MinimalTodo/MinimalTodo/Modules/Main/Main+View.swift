@@ -24,7 +24,6 @@ extension Main {
         public init(with presenter: Presenter) {
             self.presenter = presenter
             super.init(nibName: nil, bundle: nil)
-            
             presenter.view = self
         }
         
@@ -79,9 +78,8 @@ extension Main {
             )
             
             searchImageView.image = UIImage(systemName: "magnifyingglass")
-            
             searchImageView.tintColor = .black
-
+            
             createTodoLabel.configureLabel(
                 text: .Localization.createYourFirstTodoList,
                 font: .interSemibold(of: 20),
@@ -137,7 +135,6 @@ extension Main {
         }
         
         private func updateUI() {
-          
             view.subviews.forEach { subview in
                 if subview is TodoListView {
                     subview.removeFromSuperview()
@@ -150,10 +147,11 @@ extension Main {
             } else {
                 appImage.isHidden = true
                 createTodoLabel.isHidden = true
-         
+                
                 var previousView: UIView? = segmentedControl
                 for todoList in todoLists {
                     let todoListView = TodoListView(todoList: todoList)
+                    todoListView.delegate = self
                     view.addView(todoListView)
                     
                     NSLayoutConstraint.activate([
@@ -166,7 +164,7 @@ extension Main {
                 }
             }
         }
-
+        
         private func loadTodoListsFromUserDefaults() {
             if let savedData = UserDefaults.standard.data(forKey: "TodoLists") {
                 let decoder = JSONDecoder()
@@ -191,4 +189,15 @@ extension Main {
     }
 }
 
-extension Main.View: MainView { }
+extension Main.View: MainView, TodoListViewDelegate {
+    func todoListViewDidSwipeToDelete(_ todoListView: TodoListView) {
+        guard let index = todoLists.firstIndex(where: { $0.title == todoListView.todoList.title }) else { return }
+        
+        todoListView.animateDeletion { [weak self] in
+            guard let self = self else { return }
+            self.todoLists.remove(at: index)
+            self.saveTodoListsToUserDefaults()
+            self.updateUI()
+        }
+    }
+}

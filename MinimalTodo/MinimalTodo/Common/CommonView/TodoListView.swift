@@ -1,10 +1,15 @@
 import UIKit
 
-final class TodoListView: UIView {
+protocol TodoListViewDelegate: AnyObject {
+    func todoListViewDidSwipeToDelete(_ todoListView: TodoListView)
+}
 
+final class TodoListView: UIView {
+    
     // MARK: - Properties -
     
-    private let todoList: TodoList
+    let todoList: TodoList
+    weak var delegate: TodoListViewDelegate?
     
     // MARK: - Subviews -
     
@@ -29,19 +34,24 @@ final class TodoListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Methods
+    // MARK: - Methods -
     
     private func setup() {
         buildHierarchy()
         configureSubviews()
         setupLayoutSubviews()
-        setupActions()
-        
-        self.backgroundColor = UIColor.Colors.randomColor()
-        self.layer.cornerRadius = 15
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.black.cgColor
-        
+        addSwipeGesture()
+    }
+    
+    private func addSwipeGesture() {
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture(_:)))
+        swipeGesture.direction = .left
+        self.addGestureRecognizer(swipeGesture)
+    }
+    
+    @objc private func handleSwipeGesture(_ gesture: UISwipeGestureRecognizer) {
+        guard gesture.state == .ended else { return }
+        delegate?.todoListViewDidSwipeToDelete(self)
     }
     
     private func buildHierarchy() {
@@ -49,8 +59,8 @@ final class TodoListView: UIView {
         mainStackView.addArrangedSubview(headerLabel)
         
         for field in todoList.additionalFields {
-            let fieldLabel = UILabel()
             
+            let fieldLabel = UILabel()
             fieldLabel.configureLabel(
                 text: field,
                 font: .interSemibold(of: 14),
@@ -64,6 +74,11 @@ final class TodoListView: UIView {
     
     private func configureSubviews() {
         
+        self.backgroundColor = UIColor.Colors.randomColor()
+        self.layer.cornerRadius = 15
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.black.cgColor
+        
         headerLabel.configureLabel(
             text: todoList.title,
             font: .interMedium(of: 20),
@@ -76,8 +91,7 @@ final class TodoListView: UIView {
             color: .black
         )
         
-        calendarImageView.setCustomImage(
-            named: "calendar")
+        calendarImageView.setCustomImage(named: "calendar")
         
         dateStackView.setupHorizontalStackView(
             spacing: 4,
@@ -87,16 +101,11 @@ final class TodoListView: UIView {
         dateStackView.addArrangedSubview(calendarImageView)
         dateStackView.addArrangedSubview(dateLabel)
         
-        labelsStackView.setupHorizontalStackView(
-            spacing: 10)
-        
+        labelsStackView.setupHorizontalStackView(spacing: 10)
         labelsStackView.addArrangedSubview(blackView)
         labelsStackView.addArrangedSubview(dateStackView)
         
-        mainStackView.setupVerticalStackView(
-            spacing: 4,
-            alignment: .leading
-        )
+        mainStackView.setupVerticalStackView(spacing: 4, alignment: .leading)
     }
     
     private func setupLayoutSubviews() {
@@ -106,12 +115,20 @@ final class TodoListView: UIView {
             mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-            mainStackView.heightAnchor.constraint(equalToConstant: 86),
             mainStackView.widthAnchor.constraint(equalToConstant: 327)
         ])
     }
     
-    private func setupActions() { }
+    // MARK: - Animation -
+    
+    func animateDeletion(completion: @escaping () -> Void) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.frame.origin.x = -self.frame.size.width
+            self.alpha = 0
+        }, completion: { _ in
+            completion()
+        })
+    }
 }
 
 extension UIColor.Colors {
