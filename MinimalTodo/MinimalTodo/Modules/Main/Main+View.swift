@@ -156,8 +156,8 @@ extension Main {
                     
                     NSLayoutConstraint.activate([
                         todoListView.topAnchor.constraint(equalTo: previousView?.bottomAnchor ?? view.topAnchor, constant: 20),
-                        todoListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-                        todoListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                        todoListView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
+                        todoListView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
                     ])
                     
                     previousView = todoListView
@@ -175,7 +175,9 @@ extension Main {
         }
         
         public func addTodoList(_ todoList: TodoList) {
-            todoLists.append(todoList)
+            var newTodoList = todoList
+            newTodoList.assignRandomColor()
+            todoLists.append(newTodoList)
             updateUI()
             saveTodoListsToUserDefaults()
         }

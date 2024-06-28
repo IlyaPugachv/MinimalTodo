@@ -41,6 +41,11 @@ final class TodoListView: UIView {
         configureSubviews()
         setupLayoutSubviews()
         addSwipeGesture()
+        setBackgroundColor()
+    }
+    
+    private func setBackgroundColor() {
+        self.backgroundColor = todoList.getColor()
     }
     
     private func addSwipeGesture() {
@@ -59,13 +64,11 @@ final class TodoListView: UIView {
         mainStackView.addArrangedSubview(headerLabel)
         
         for field in todoList.additionalFields {
-            
             let fieldLabel = UILabel()
             fieldLabel.configureLabel(
                 text: field,
                 font: .interSemibold(of: 14),
                 color: .black)
-            
             mainStackView.addArrangedSubview(fieldLabel)
         }
         
@@ -74,7 +77,6 @@ final class TodoListView: UIView {
     
     private func configureSubviews() {
         
-        self.backgroundColor = UIColor.Colors.randomColor()
         self.layer.cornerRadius = 15
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.black.cgColor
@@ -128,17 +130,5 @@ final class TodoListView: UIView {
         }, completion: { _ in
             completion()
         })
-    }
-}
-
-extension UIColor.Colors {
-    static func randomColor() -> UIColor {
-        let colors: [UIColor] = [
-            UIColor.Colors.yellow,
-            UIColor.Colors.green,
-            UIColor.Colors.violet,
-            UIColor.Colors.red
-        ]
-        return colors.randomElement() ?? .clear
     }
 }
