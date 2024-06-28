@@ -95,7 +95,7 @@ extension NewList {
         
         private func configureSubviews() {
             
-            backButton.setImage(
+            backButton.setCustomImage(
                 named: "custom_back_arrow",
                 for: .normal
             )
@@ -109,7 +109,7 @@ extension NewList {
                 returnKeyType: .done,
                 delegate: self)
             
-            addTextFieldButton.setImage(
+            addTextFieldButton.setCustomImage(
                 named: "plus",
                 for: .normal
             )

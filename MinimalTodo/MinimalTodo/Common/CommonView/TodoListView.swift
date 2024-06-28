@@ -37,8 +37,11 @@ final class TodoListView: UIView {
         setupLayoutSubviews()
         setupActions()
         
-        // Apply random background color from UIColor.Colors
         self.backgroundColor = UIColor.Colors.randomColor()
+        self.layer.cornerRadius = 15
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.black.cgColor
+        
     }
     
     private func buildHierarchy() {
@@ -103,6 +106,8 @@ final class TodoListView: UIView {
             mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            mainStackView.heightAnchor.constraint(equalToConstant: 86),
+            mainStackView.widthAnchor.constraint(equalToConstant: 327)
         ])
     }
     
