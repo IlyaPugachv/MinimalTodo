@@ -288,7 +288,6 @@ extension NewList {
             let newList = TodoList(title: title, label: label, date: date, additionalFields: additionalFields)
             todoLists.append(newList)
 
-            // Сохранение в UserDefaults
             saveTodoListToUserDefaults()
             
             presenter.updateMainView(with: newList)
@@ -324,12 +323,11 @@ extension NewList {
             let checkbox = UIButton()
             checkbox.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
             checkbox.setImage(UIImage(systemName: "square"), for: .normal)
+            checkbox.tintColor = .black
             checkbox.addTarget(self, action: #selector(checkboxTapped(_:)), for: .touchUpInside)
            
             let textField = UITextField()
-            textField.placeholder = "Additional Info"
-            textField.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-            textField.borderStyle = .roundedRect
+            textField.font = .interRegularLight(of: 14)
             textField.returnKeyType = .done
             textField.delegate = self
             
@@ -339,7 +337,7 @@ extension NewList {
             view.addView(textField)
             
             NSLayoutConstraint.activate([
-                checkbox.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                checkbox.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -2),
                 checkbox.centerYAnchor.constraint(equalTo: view.centerYAnchor),
                 checkbox.widthAnchor.constraint(equalToConstant: 24),
                 checkbox.heightAnchor.constraint(equalToConstant: 24),

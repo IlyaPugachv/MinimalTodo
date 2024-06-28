@@ -67,7 +67,7 @@ final class TodoListView: UIView {
             let fieldLabel = UILabel()
             fieldLabel.configureLabel(
                 text: field,
-                font: .interSemibold(of: 14),
+                font: .interRegularLight(of: 14),
                 color: .black)
             mainStackView.addArrangedSubview(fieldLabel)
         }
@@ -89,7 +89,7 @@ final class TodoListView: UIView {
         
         dateLabel.configureLabel(
             text: todoList.date,
-            font: .interSemibold(of: 8),
+            font: .interRegularLight(of: 8),
             color: .black
         )
         
