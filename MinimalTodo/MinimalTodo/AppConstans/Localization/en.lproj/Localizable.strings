@@ -6,6 +6,7 @@
 "allList" = "All List";
 "pinned" = "Pinned";
 "createYourFirstTodoList" = "Create your first to-do list";
+"ooopsNoPinnedListYet" = "Ooops! No pinned list yet...";
 "newList" = "New List";
 
 //MARK: - Create New List SCREEN LOCALIZATION -

@@ -16,7 +16,9 @@ extension Main {
         private let searchImageView: UIImageView = .init()
         private let segmentedControl: CustomSegmentedControl = .init()
         private let appImage: UIImageView = .init(image: .imageApp)
+        private let appImageOne: UIImageView = .init(image: .imageAppOne)
         private let createTodoLabel: UILabel = .init()
+        private let noPinnedLabel: UILabel = .init()
         private let newListButton: UIButton = .init()
         
         // MARK: - Initializers -
@@ -62,7 +64,9 @@ extension Main {
             view.addView(searchImageView)
             view.addView(segmentedControl)
             view.addView(appImage)
+            view.addView(appImageOne)
             view.addView(createTodoLabel)
+            view.addView(noPinnedLabel)
             view.addView(newListButton)
         }
         
@@ -84,6 +88,12 @@ extension Main {
             
             createTodoLabel.configureLabel(
                 text: .Localization.createYourFirstTodoList,
+                font: .interSemibold(of: 20),
+                color: .black
+            )
+            
+            noPinnedLabel.configureLabel(
+                text: .Localization.ooopsNoPinnedListYet,
                 font: .interSemibold(of: 20),
                 color: .black
             )
@@ -119,8 +129,14 @@ extension Main {
                 appImage.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 50),
                 appImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 
+                appImageOne.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 50),
+                appImageOne.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                
                 createTodoLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -160),
                 createTodoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                
+                noPinnedLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -160),
+                noPinnedLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 
                 newListButton.topAnchor.constraint(equalTo: createTodoLabel.bottomAnchor, constant: 25),
                 newListButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -146,11 +162,22 @@ extension Main {
             let filteredTodoLists = filterTodoLists()
             
             if filteredTodoLists.isEmpty {
-                appImage.isHidden = false
-                createTodoLabel.isHidden = false
+                if segmentedControl.selectedSegmentIndex == 0 {
+                    appImage.isHidden = false
+                    appImageOne.isHidden = true
+                    createTodoLabel.isHidden = false
+                    noPinnedLabel.isHidden = true
+                } else if segmentedControl.selectedSegmentIndex == 1 {
+                    appImage.isHidden = true
+                    appImageOne.isHidden = false
+                    createTodoLabel.isHidden = true
+                    noPinnedLabel.isHidden = false
+                }
             } else {
                 appImage.isHidden = true
+                appImageOne.isHidden = true
                 createTodoLabel.isHidden = true
+                noPinnedLabel.isHidden = true
                 
                 var previousView: UIView? = segmentedControl
                 for todoList in filteredTodoLists {
@@ -195,6 +222,9 @@ extension Main {
             newTodoList.assignRandomColor()
             todoLists.append(newTodoList)
             saveTodoListsToUserDefaults()
+            
+            //            // Set the segmented control to "All Lists"
+            //            segmentedControl.selectedSegmentIndex = 0
             updateUI()
         }
         

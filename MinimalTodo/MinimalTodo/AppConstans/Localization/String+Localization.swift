@@ -11,6 +11,7 @@ extension String {
         static var allList: String { localise("allList") }
         static var pinned: String { localise("pinned") }
         static var createYourFirstTodoList: String { localise("createYourFirstTodoList") }
+        static var ooopsNoPinnedListYet: String { localise("ooopsNoPinnedListYet") }
         static var newList: String { localise("newList") }
         
         //MARK: - New List -
