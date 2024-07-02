@@ -21,6 +21,8 @@ extension Main {
         private let noPinnedLabel: UILabel = .init()
         private let newListButton: UIButton = .init()
         
+        private let fullScreenView: UIView = .init()
+        
         // MARK: - Initializers -
         
         public init(with presenter: Presenter) {
@@ -68,10 +70,14 @@ extension Main {
             view.addView(createTodoLabel)
             view.addView(noPinnedLabel)
             view.addView(newListButton)
+            view.addView(fullScreenView)
         }
         
         private func configureSubviews() {
             navigationItem.hidesBackButton = true
+            
+            fullScreenView.isHidden = true
+            fullScreenView.backgroundColor = .white
             
             segmentedControl.delegate = self
             
@@ -142,6 +148,11 @@ extension Main {
                 newListButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 newListButton.widthAnchor.constraint(equalToConstant: 65),
                 newListButton.heightAnchor.constraint(equalToConstant: 65),
+                
+                fullScreenView.topAnchor.constraint(equalTo: view.topAnchor),
+                fullScreenView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                fullScreenView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                fullScreenView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
         }
         
@@ -150,51 +161,58 @@ extension Main {
                 guard let self = self else { return }
                 self.presenter.goToNewListScreen()
             }), for: .touchUpInside)
+            
+            searchImageView.isUserInteractionEnabled = true
+            searchImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(searchImageViewTapped)))
+        }
+        
+        @objc private func searchImageViewTapped() {
+            fullScreenView.isHidden = false
+            
+            view.subviews.compactMap { $0 as? TodoListView }.forEach { $0.isHidden = true }
         }
         
         private func updateUI() {
-            view.subviews.forEach { subview in
-                if subview is TodoListView {
-                    subview.removeFromSuperview()
-                }
-            }
-            
-            let filteredTodoLists = filterTodoLists()
-            
-            if filteredTodoLists.isEmpty {
-                if segmentedControl.selectedSegmentIndex == 0 {
-                    appImage.isHidden = false
-                    appImageOne.isHidden = true
-                    createTodoLabel.isHidden = false
-                    noPinnedLabel.isHidden = true
-                } else if segmentedControl.selectedSegmentIndex == 1 {
-                    appImage.isHidden = true
-                    appImageOne.isHidden = false
-                    createTodoLabel.isHidden = true
-                    noPinnedLabel.isHidden = false
-                }
-            } else {
-                appImage.isHidden = true
-                appImageOne.isHidden = true
-                createTodoLabel.isHidden = true
-                noPinnedLabel.isHidden = true
-                
-                var previousView: UIView? = segmentedControl
-                for todoList in filteredTodoLists {
-                    let todoListView = TodoListView(todoList: todoList)
-                    todoListView.delegate = self
-                    view.addView(todoListView)
-                    
-                    NSLayoutConstraint.activate([
-                        todoListView.topAnchor.constraint(equalTo: previousView?.bottomAnchor ?? view.topAnchor, constant: 20),
-                        todoListView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
-                        todoListView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
-                    ])
-                    
-                    previousView = todoListView
-                }
-            }
-        }
+             // Сначала скрываем все TodoListView
+             view.subviews.compactMap { $0 as? TodoListView }.forEach { $0.isHidden = true }
+             
+             let filteredTodoLists = filterTodoLists()
+             
+             if filteredTodoLists.isEmpty {
+                 if segmentedControl.selectedSegmentIndex == 0 {
+                     appImage.isHidden = false
+                     appImageOne.isHidden = true
+                     createTodoLabel.isHidden = false
+                     noPinnedLabel.isHidden = true
+                 } else if segmentedControl.selectedSegmentIndex == 1 {
+                     appImage.isHidden = true
+                     appImageOne.isHidden = false
+                     createTodoLabel.isHidden = true
+                     noPinnedLabel.isHidden = false
+                 }
+             } else {
+                 appImage.isHidden = true
+                 appImageOne.isHidden = true
+                 createTodoLabel.isHidden = true
+                 noPinnedLabel.isHidden = true
+                 
+                 var previousView: UIView? = segmentedControl
+                 for todoList in filteredTodoLists {
+                     let todoListView = TodoListView(todoList: todoList)
+                     todoListView.delegate = self
+                     view.addView(todoListView)
+                     
+                     NSLayoutConstraint.activate([
+                         todoListView.topAnchor.constraint(equalTo: previousView?.bottomAnchor ?? view.topAnchor, constant: 20),
+                         todoListView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
+                         todoListView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+                     ])
+                     
+                     previousView = todoListView
+                 }
+             }
+         }
+
         
         private func filterTodoLists() -> [TodoList] {
             let selectedSegmentIndex = segmentedControl.selectedSegmentIndex
@@ -255,3 +273,6 @@ extension Main.View: CustomSegmentedControlDelegate {
         updateUI()
     }
 }
+
+
+
