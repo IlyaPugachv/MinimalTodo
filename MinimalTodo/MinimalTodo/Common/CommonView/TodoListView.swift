@@ -64,12 +64,29 @@ final class TodoListView: UIView {
         mainStackView.addArrangedSubview(headerLabel)
         
         for field in todoList.additionalFields {
+            let fieldStackView = UIStackView()
+            fieldStackView.axis = .horizontal
+            fieldStackView.alignment = .center
+            fieldStackView.spacing = 8
+            
+            let checkbox = UIButton()
+            checkbox.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
+            checkbox.setImage(UIImage(systemName: "square"), for: .normal)
+            checkbox.tintColor = .black
+            checkbox.addTarget(self, action: #selector(checkboxTapped(_:)), for: .touchUpInside)
+            
             let fieldLabel = UILabel()
             fieldLabel.configureLabel(
                 text: field,
                 font: .interRegularLight(of: 14),
-                color: .black)
-            mainStackView.addArrangedSubview(fieldLabel)
+                color: .black
+            )
+            fieldLabel.tag = 100 // Set a tag to identify this label later
+            
+            fieldStackView.addArrangedSubview(checkbox)
+            fieldStackView.addArrangedSubview(fieldLabel)
+            
+            mainStackView.addArrangedSubview(fieldStackView)
         }
         
         mainStackView.addArrangedSubview(labelsStackView)
@@ -130,5 +147,22 @@ final class TodoListView: UIView {
         }, completion: { _ in
             completion()
         })
+    }
+    
+    @objc
+    private func checkboxTapped(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        if let fieldStackView = sender.superview as? UIStackView,
+           let fieldLabel = fieldStackView.arrangedSubviews.first(where: { $0 is UILabel && $0.tag == 100 }) as? UILabel {
+            if sender.isSelected {
+                let attributedString = NSMutableAttributedString(string: fieldLabel.text ?? "")
+                attributedString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attributedString.length))
+                fieldLabel.attributedText = attributedString
+            } else {
+                let attributedString = NSMutableAttributedString(string: fieldLabel.text ?? "")
+                attributedString.removeAttribute(.strikethroughStyle, range: NSMakeRange(0, attributedString.length))
+                fieldLabel.attributedText = attributedString
+            }
+        }
     }
 }
