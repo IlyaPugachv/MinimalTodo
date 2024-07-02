@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BC3F6F932C3401C0004C0B33 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3F6F922C3401C0004C0B33 /* SearchView.swift */; };
 		BC62399F2C2EE3DC002E9117 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC62399E2C2EE3DC002E9117 /* Inter-Regular.ttf */; };
 		BC6239A12C2EE5CF002E9117 /* inter-RegularLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC6239A02C2EE5CF002E9117 /* inter-RegularLight.ttf */; };
 		BC67F2302C2D870D00329BB8 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC67F22F2C2D870D00329BB8 /* UIColor+Extensions.swift */; };
@@ -45,7 +44,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BC3F6F922C3401C0004C0B33 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		BC62399E2C2EE3DC002E9117 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		BC6239A02C2EE5CF002E9117 /* inter-RegularLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "inter-RegularLight.ttf"; sourceTree = "<group>"; };
 		BC67F22F2C2D870D00329BB8 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -262,7 +260,6 @@
 				BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */,
 				BCF706252C2C015900EE73A3 /* BackgroundView.swift */,
 				BCB94C4D2C256D46001BA890 /* ToggleButton.swift */,
-				BC3F6F922C3401C0004C0B33 /* SearchView.swift */,
 			);
 			path = CommonView;
 			sourceTree = "<group>";
@@ -371,7 +368,6 @@
 				BCB94C4A2C242D60001BA890 /* NewList+View.swift in Sources */,
 				BCB94C442C2311CB001BA890 /* CustomSegmentedControl.swift in Sources */,
 				BCB94C242C22D460001BA890 /* OnboardingView.swift in Sources */,
-				BC3F6F932C3401C0004C0B33 /* SearchView.swift in Sources */,
 				BCB94C222C22D451001BA890 /* Onboarding+View.swift in Sources */,
 				BCB94C482C242D52001BA890 /* NewList+Presenter.swift in Sources */,
 				BCF706242C2C012600EE73A3 /* UILabel+Extensions.swift in Sources */,
