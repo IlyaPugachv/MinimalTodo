@@ -69,6 +69,8 @@ extension Main {
         private func configureSubviews() {
             navigationItem.hidesBackButton = true
             
+            segmentedControl.delegate = self
+            
             appMiniIconImageView.contentMode = .scaleAspectFit
             
             nameAppLabel.configureLabel(
@@ -141,7 +143,9 @@ extension Main {
                 }
             }
             
-            if todoLists.isEmpty {
+            let filteredTodoLists = filterTodoLists()
+            
+            if filteredTodoLists.isEmpty {
                 appImage.isHidden = false
                 createTodoLabel.isHidden = false
             } else {
@@ -149,7 +153,7 @@ extension Main {
                 createTodoLabel.isHidden = true
                 
                 var previousView: UIView? = segmentedControl
-                for todoList in todoLists {
+                for todoList in filteredTodoLists {
                     let todoListView = TodoListView(todoList: todoList)
                     todoListView.delegate = self
                     view.addView(todoListView)
@@ -162,6 +166,18 @@ extension Main {
                     
                     previousView = todoListView
                 }
+            }
+        }
+        
+        private func filterTodoLists() -> [TodoList] {
+            let selectedSegmentIndex = segmentedControl.selectedSegmentIndex
+            switch selectedSegmentIndex {
+            case 0:
+                return todoLists.filter { !$0.isPinned } // All Lists excluding pinned
+            case 1:
+                return todoLists.filter { $0.isPinned } // Pinned Lists
+            default:
+                return todoLists.filter { !$0.isPinned } // Default to All Lists excluding pinned
             }
         }
         
@@ -178,8 +194,8 @@ extension Main {
             var newTodoList = todoList
             newTodoList.assignRandomColor()
             todoLists.append(newTodoList)
-            updateUI()
             saveTodoListsToUserDefaults()
+            updateUI()
         }
         
         private func saveTodoListsToUserDefaults() {
@@ -201,5 +217,11 @@ extension Main.View: MainView, TodoListViewDelegate {
             self.saveTodoListsToUserDefaults()
             self.updateUI()
         }
+    }
+}
+
+extension Main.View: CustomSegmentedControlDelegate {
+    func segmentedControlChanged(to index: Int) {
+        updateUI()
     }
 }

@@ -8,12 +8,15 @@ struct TodoList: Codable {
     var additionalFields: [String]
     var colorIdentifier: String?
     
-    init(title: String, label: String, date: String, additionalFields: [String]) {
+    var isPinned: Bool = false
+    
+    init(title: String, label: String, date: String, additionalFields: [String], isPinned: Bool) {
         self.id = UUID()
         self.title = title
         self.label = label
         self.date = date
         self.additionalFields = additionalFields
+        self.isPinned = isPinned
     }
     
     mutating func assignRandomColor() {

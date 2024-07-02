@@ -282,14 +282,13 @@ extension NewList {
             let title = titleTextField.text ?? ""
             let label = selectedLabel ?? .Localization.personal
             let date = DateFormatter.formattedDate()
-
             let additionalFields = textFields.map { $0.text ?? "" }
+            let isPinned = toggleButton.backgroundColor == .black
 
-            let newList = TodoList(title: title, label: label, date: date, additionalFields: additionalFields)
+            let newList = TodoList(title: title, label: label, date: date, additionalFields: additionalFields, isPinned: isPinned)
             todoLists.append(newList)
 
             saveTodoListToUserDefaults()
-            
             presenter.updateMainView(with: newList)
         }
 
