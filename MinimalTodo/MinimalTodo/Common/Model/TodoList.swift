@@ -7,8 +7,7 @@ struct TodoList: Codable {
     var date: String
     var additionalFields: [String]
     var colorIdentifier: String?
-    
-    var isPinned: Bool = false
+    var isPinned: Bool  
     
     init(title: String, label: String, date: String, additionalFields: [String], isPinned: Bool) {
         self.id = UUID()
