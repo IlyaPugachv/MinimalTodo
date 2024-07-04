@@ -25,7 +25,10 @@ extension Main {
         private let fullScreenView: UIView = .init()
         private let searchTextField: UITextField = .init()
         private let cancelButton: UIButton = .init()
-        
+
+        private let scrollView: UIScrollView = .init()
+        private let contentView: UIView = .init()
+
         // MARK: - Initializers -
         
         public init(with presenter: Presenter) {
@@ -75,6 +78,9 @@ extension Main {
             view.addView(noPinnedLabel)
             view.addView(newListButton)
             view.addView(fullScreenView)
+            view.addView(scrollView)
+            
+            scrollView.addView(contentView)
             
             fullScreenView.addView(searchTextField)
             fullScreenView.addView(cancelButton)
@@ -125,6 +131,9 @@ extension Main {
             let plusImage = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate)
             newListButton.setImage(plusImage, for: .normal)
             newListButton.tintColor = .white
+
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
+            contentView.translatesAutoresizingMaskIntoConstraints = false
         }
         
         private func layoutSubviews() {
@@ -147,6 +156,17 @@ extension Main {
                 segmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
                 segmentedControl.heightAnchor.constraint(equalToConstant: 47),
                 
+                scrollView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 20),
+                scrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+                scrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+                scrollView.bottomAnchor.constraint(equalTo: newListButton.topAnchor, constant: -20),
+                
+                contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+                contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+                contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+                contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+                contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+                
                 appImage.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 50),
                 appImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 
@@ -159,7 +179,7 @@ extension Main {
                 noPinnedLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -160),
                 noPinnedLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 
-                newListButton.topAnchor.constraint(equalTo: createTodoLabel.bottomAnchor, constant: 25),
+                newListButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -30),
                 newListButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 newListButton.widthAnchor.constraint(equalToConstant: 65),
                 newListButton.heightAnchor.constraint(equalToConstant: 65),
@@ -194,7 +214,7 @@ extension Main {
         @objc private func searchImageViewTapped() {
             fullScreenView.isHidden = false
             fullScreenView.alpha = 1
-            view.subviews.compactMap { $0 as? TodoListView }.forEach { $0.isHidden = true }
+            contentView.subviews.forEach { $0.isHidden = true }
             searchTextField.becomeFirstResponder()
         }
         
@@ -202,13 +222,12 @@ extension Main {
             fullScreenView.isHidden = true
             fullScreenView.alpha = 0
             searchTextField.text = ""
-            view.subviews.compactMap { $0 as? TodoListView }.forEach { $0.isHidden = false }
+            contentView.subviews.forEach { $0.isHidden = false }
             updateUI()
         }
         
         private func updateUI() {
-          
-            view.subviews.compactMap { $0 as? TodoListView }.forEach { $0.removeFromSuperview() }
+            contentView.subviews.forEach { $0.removeFromSuperview() }
             
             let listsToDisplay: [TodoList]
             if fullScreenView.isHidden {
@@ -235,19 +254,24 @@ extension Main {
                 createTodoLabel.isHidden = true
                 noPinnedLabel.isHidden = true
                 
-                var previousView: UIView? = segmentedControl
+                var previousView: UIView? = nil
                 for todoList in listsToDisplay {
                     let todoListView = TodoListView(todoList: todoList)
                     todoListView.delegate = self
-                    view.addView(todoListView)
+                    contentView.addView(todoListView)
+                    todoListView.translatesAutoresizingMaskIntoConstraints = false
                     
                     NSLayoutConstraint.activate([
-                        todoListView.topAnchor.constraint(equalTo: previousView?.bottomAnchor ?? view.topAnchor, constant: 20),
-                        todoListView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
-                        todoListView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+                        todoListView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+                        todoListView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+                        todoListView.topAnchor.constraint(equalTo: previousView?.bottomAnchor ?? contentView.topAnchor, constant: previousView == nil ? 0 : 20),
                     ])
                     
                     previousView = todoListView
+                }
+                
+                if let previousView = previousView {
+                    previousView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
                 }
             }
         }
@@ -332,3 +356,4 @@ extension Main.View: UITextFieldDelegate {
         return true
     }
 }
+
