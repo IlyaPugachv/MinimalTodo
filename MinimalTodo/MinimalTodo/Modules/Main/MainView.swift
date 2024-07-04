@@ -5,3 +5,4 @@ struct Main { }
 protocol MainView: ViewDelegate {
 
 }
+

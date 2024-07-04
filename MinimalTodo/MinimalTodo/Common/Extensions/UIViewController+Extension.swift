@@ -41,4 +41,23 @@ extension UIViewController: ViewDelegate {
     }
 }
 
+extension UIViewController {
+    
+    func showAlertWithConfirmation(title: String, message: String, yesButtonTitle: String, noButtonTitle: String, yesCompletion: @escaping () -> Void, noCompletion: @escaping () -> Void) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction(title: yesButtonTitle, style: .default) { _ in
+            yesCompletion()
+        }
+        alertController.addAction(yesAction)
+        
+        let noAction = UIAlertAction(title: noButtonTitle, style: .cancel) { _ in
+            noCompletion()
+        }
+        alertController.addAction(noAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+}
 
