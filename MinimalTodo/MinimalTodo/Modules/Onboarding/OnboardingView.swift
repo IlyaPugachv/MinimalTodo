@@ -2,6 +2,6 @@ import UIKit
 
 struct Onboarding { }
 
-protocol OnboardingView: AnyObject {
+protocol OnboardingView: ViewDelegate {
 
 }

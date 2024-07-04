@@ -1,2 +1,18 @@
 //MARK: - ONBOARDING SCREEN LOCALIZATION -
 "writeWhatYouNeedToDoEveryday" = "Write what you need to do. Everyday.";
+"continuee" = "Continue";
+
+//MARK: - MAIN SCREEN LOCALIZATION -
+"allList" = "All List";
+"pinned" = "Pinned";
+"createYourFirstTodoList" = "Create your first to-do list";
+"ooopsNoPinnedListYet" = "Ooops! No pinned list yet...";
+"newList" = "New List";
+
+//MARK: - Create New List SCREEN LOCALIZATION -
+"title" = "Title";
+"chooseALabel" = "Choose a label";
+"personal" = "Personal";
+"work" = "Work";
+"finance" = "Finance";
+"other" = "Other";

@@ -1,3 +1,18 @@
 //MARK: - ONBOARDING SCREEN LOCALIZATION -
-"writeWhatYouNeedToDoEveryday" = "Напишите, что вам нужно сделать. Ежедневный.";
+"writeWhatYouNeedToDoEveryday" = "Напишите, что вам нужно сделать. Ежедневно.";
+"continuee" = "Продолжить";
 
+//MARK: - MAIN SCREEN LOCALIZATION -
+"allList" = "Весь список";
+"pinned" = "Закрепленные";
+"createYourFirstTodoList" = "Создайте свой первый список дел";
+"ooopsNoPinnedListYet" = "Упс! Пока нет закрепленного списка...";
+"newList" = "+ Новый список";
+
+//MARK: - Create New List SCREEN LOCALIZATION -
+"title" = "Заголовок";
+"chooseALabel" = "Выберите ярлык";
+"personal" = "Личный";
+"work" = "Работа";
+"finance" = "Финансы";
+"other" = "Другое";

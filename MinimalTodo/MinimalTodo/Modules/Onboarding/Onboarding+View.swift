@@ -13,6 +13,7 @@ extension Onboarding {
         private let appIconImageView: UIImageView = .init(image: .applicationIcon)
         private let appNameLabel: UILabel = .init()
         private let infoAboutAppLabel: UILabel = .init()
+        private let continueButton: UIButton = .init()
         
         // MARK: - Initializers -
         
@@ -54,6 +55,7 @@ extension Onboarding {
             view.addView(appIconImageView)
             view.addView(appNameLabel)
             view.addView(infoAboutAppLabel)
+            view.addView(continueButton)
         }
         
         private func configureSubviews() {
@@ -70,6 +72,11 @@ extension Onboarding {
             infoAboutAppLabel.text = .Localization.writeWhatYouNeedToDoEveryday
             infoAboutAppLabel.textAlignment = .center
             
+            continueButton.setTitle(.Localization.continuee, for: .normal)
+            continueButton.setTitleColor(.black, for: .normal)
+            continueButton.titleLabel?.font = UIFont.interMedium(of: 16)
+            continueButton.backgroundColor = .white
+            continueButton.layer.cornerRadius = 25
         }
         
         private func layoutSubviews() {
@@ -87,11 +94,19 @@ extension Onboarding {
                 infoAboutAppLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 50),
                 infoAboutAppLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -50),
 
-            
+                continueButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -35),
+                continueButton.centerXAnchor.constraint(equalTo: appIconImageView.centerXAnchor),
+                continueButton.widthAnchor.constraint(equalToConstant: 199),
+                continueButton.heightAnchor.constraint(equalToConstant: 53),
             ])
         }
         
         private func setupActions() {
+
+            continueButton.addAction(UIAction(handler: { [weak self] _ in
+                guard let self else { return }
+                presenter.goToMainScreen()
+            }), for: .touchUpInside)
             
         }
     }

@@ -2,6 +2,7 @@ import UIKit
 
 struct Main { }
 
-protocol MainView: AnyObject {
+protocol MainView: ViewDelegate {
 
 }
+

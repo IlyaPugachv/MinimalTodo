@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC62399F2C2EE3DC002E9117 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC62399E2C2EE3DC002E9117 /* Inter-Regular.ttf */; };
+		BC6239A12C2EE5CF002E9117 /* inter-RegularLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC6239A02C2EE5CF002E9117 /* inter-RegularLight.ttf */; };
+		BC67F2302C2D870D00329BB8 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC67F22F2C2D870D00329BB8 /* UIColor+Extensions.swift */; };
 		BCB94BCC2C21F7AB001BA890 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94BCB2C21F7AB001BA890 /* AppDelegate.swift */; };
 		BCB94BCE2C21F7AB001BA890 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94BCD2C21F7AB001BA890 /* SceneDelegate.swift */; };
 		BCB94BD52C21F7AC001BA890 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCB94BD42C21F7AC001BA890 /* Assets.xcassets */; };
@@ -24,9 +27,26 @@
 		BCB94C302C22DF3F001BA890 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C2F2C22DF3F001BA890 /* UIView+Extensions.swift */; };
 		BCB94C3D2C22E27E001BA890 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BCB94C3B2C22E27E001BA890 /* Localizable.strings */; };
 		BCB94C402C22E2B2001BA890 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C3F2C22E2B2001BA890 /* String+Localization.swift */; };
+		BCB94C422C22FDCE001BA890 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C412C22FDCE001BA890 /* UIViewController+Extension.swift */; };
+		BCB94C442C2311CB001BA890 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */; };
+		BCB94C482C242D52001BA890 /* NewList+Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C472C242D52001BA890 /* NewList+Presenter.swift */; };
+		BCB94C4A2C242D60001BA890 /* NewList+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C492C242D60001BA890 /* NewList+View.swift */; };
+		BCB94C4C2C242D69001BA890 /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C4B2C242D69001BA890 /* NewListView.swift */; };
+		BCB94C4E2C256D46001BA890 /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C4D2C256D46001BA890 /* ToggleButton.swift */; };
+		BCB94C5C2C29C966001BA890 /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C5B2C29C966001BA890 /* DateFormatter+Extensions.swift */; };
+		BCB94C5F2C29D0A7001BA890 /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */; };
+		BCF706242C2C012600EE73A3 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF706232C2C012600EE73A3 /* UILabel+Extensions.swift */; };
+		BCF706262C2C015900EE73A3 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF706252C2C015900EE73A3 /* BackgroundView.swift */; };
+		BCF7062A2C2C095D00EE73A3 /* TodoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF706292C2C095D00EE73A3 /* TodoList.swift */; };
+		BCF7062C2C2C1B5700EE73A3 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF7062B2C2C1B5700EE73A3 /* UIButton+Extensions.swift */; };
+		BCF7062E2C2C318400EE73A3 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF7062D2C2C318400EE73A3 /* UIStackView+Extensions.swift */; };
+		BCF706302C2C385E00EE73A3 /* TextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF7062F2C2C385E00EE73A3 /* TextField+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BC62399E2C2EE3DC002E9117 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
+		BC6239A02C2EE5CF002E9117 /* inter-RegularLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "inter-RegularLight.ttf"; sourceTree = "<group>"; };
+		BC67F22F2C2D870D00329BB8 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		BCB94BC82C21F7AB001BA890 /* MinimalTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinimalTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCB94BCB2C21F7AB001BA890 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCB94BCD2C21F7AB001BA890 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +67,20 @@
 		BCB94C3C2C22E27E001BA890 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BCB94C3E2C22E285001BA890 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BCB94C3F2C22E2B2001BA890 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
+		BCB94C412C22FDCE001BA890 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		BCB94C472C242D52001BA890 /* NewList+Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewList+Presenter.swift"; sourceTree = "<group>"; };
+		BCB94C492C242D60001BA890 /* NewList+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewList+View.swift"; sourceTree = "<group>"; };
+		BCB94C4B2C242D69001BA890 /* NewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
+		BCB94C4D2C256D46001BA890 /* ToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
+		BCB94C5B2C29C966001BA890 /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
+		BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListView.swift; sourceTree = "<group>"; };
+		BCF706232C2C012600EE73A3 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		BCF706252C2C015900EE73A3 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		BCF706292C2C095D00EE73A3 /* TodoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoList.swift; sourceTree = "<group>"; };
+		BCF7062B2C2C1B5700EE73A3 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		BCF7062D2C2C318400EE73A3 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
+		BCF7062F2C2C385E00EE73A3 /* TextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +94,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC67F22E2C2D86F900329BB8 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				BC67F22F2C2D870D00329BB8 /* UIColor+Extensions.swift */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
 		BCB94BBF2C21F7AB001BA890 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +165,7 @@
 			children = (
 				BCB94C1E2C22D3CD001BA890 /* Onboarding */,
 				BCB94C0F2C220FD1001BA890 /* Main */,
+				BCB94C462C242D20001BA890 /* NewList */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -130,6 +173,8 @@
 		BCB94C1A2C22D13E001BA890 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BCF706282C2C094600EE73A3 /* Model */,
+				BCF706272C2C090E00EE73A3 /* CommonView */,
 				BCB94C1B2C22D145001BA890 /* Extensions */,
 			);
 			path = Common;
@@ -140,6 +185,12 @@
 			children = (
 				BCB94C2D2C22DC07001BA890 /* UIFont+Extensions.swift */,
 				BCB94C2F2C22DF3F001BA890 /* UIView+Extensions.swift */,
+				BCB94C412C22FDCE001BA890 /* UIViewController+Extension.swift */,
+				BCB94C5B2C29C966001BA890 /* DateFormatter+Extensions.swift */,
+				BCF706232C2C012600EE73A3 /* UILabel+Extensions.swift */,
+				BCF7062B2C2C1B5700EE73A3 /* UIButton+Extensions.swift */,
+				BCF7062D2C2C318400EE73A3 /* UIStackView+Extensions.swift */,
+				BCF7062F2C2C385E00EE73A3 /* TextField+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -147,6 +198,7 @@
 		BCB94C1C2C22D15B001BA890 /* AppConstans */ = {
 			isa = PBXGroup;
 			children = (
+				BC67F22E2C2D86F900329BB8 /* Color */,
 				BCB94C1D2C22D163001BA890 /* Localization */,
 			);
 			path = AppConstans;
@@ -182,11 +234,42 @@
 		BCB94C262C22D90B001BA890 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				BC6239A02C2EE5CF002E9117 /* inter-RegularLight.ttf */,
+				BC62399E2C2EE3DC002E9117 /* Inter-Regular.ttf */,
 				BCB94C292C22D9E4001BA890 /* Inter-Medium.ttf */,
 				BCB94C2A2C22D9E4001BA890 /* Inter-Semibold.ttf */,
 				BCB94C272C22D97C001BA890 /* Inter-Bold.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		BCB94C462C242D20001BA890 /* NewList */ = {
+			isa = PBXGroup;
+			children = (
+				BCB94C472C242D52001BA890 /* NewList+Presenter.swift */,
+				BCB94C492C242D60001BA890 /* NewList+View.swift */,
+				BCB94C4B2C242D69001BA890 /* NewListView.swift */,
+			);
+			path = NewList;
+			sourceTree = "<group>";
+		};
+		BCF706272C2C090E00EE73A3 /* CommonView */ = {
+			isa = PBXGroup;
+			children = (
+				BCB94C432C2311CB001BA890 /* CustomSegmentedControl.swift */,
+				BCB94C5E2C29D0A7001BA890 /* TodoListView.swift */,
+				BCF706252C2C015900EE73A3 /* BackgroundView.swift */,
+				BCB94C4D2C256D46001BA890 /* ToggleButton.swift */,
+			);
+			path = CommonView;
+			sourceTree = "<group>";
+		};
+		BCF706282C2C094600EE73A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BCF706292C2C095D00EE73A3 /* TodoList.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,9 +334,11 @@
 				BCB94BD52C21F7AC001BA890 /* Assets.xcassets in Resources */,
 				BCB94C3D2C22E27E001BA890 /* Localizable.strings in Resources */,
 				BCB94C2C2C22D9E4001BA890 /* Inter-Semibold.ttf in Resources */,
+				BC6239A12C2EE5CF002E9117 /* inter-RegularLight.ttf in Resources */,
 				BCB94C282C22D97C001BA890 /* Inter-Bold.ttf in Resources */,
 				BCB94C2B2C22D9E4001BA890 /* Inter-Medium.ttf in Resources */,
 				BCB94BD82C21F7AC001BA890 /* Base in Resources */,
+				BC62399F2C2EE3DC002E9117 /* Inter-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,17 +349,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCB94C422C22FDCE001BA890 /* UIViewController+Extension.swift in Sources */,
+				BCF7062C2C2C1B5700EE73A3 /* UIButton+Extensions.swift in Sources */,
+				BCF7062A2C2C095D00EE73A3 /* TodoList.swift in Sources */,
+				BC67F2302C2D870D00329BB8 /* UIColor+Extensions.swift in Sources */,
 				BCB94C132C220FFE001BA890 /* Main+View.swift in Sources */,
+				BCB94C5F2C29D0A7001BA890 /* TodoListView.swift in Sources */,
+				BCF706262C2C015900EE73A3 /* BackgroundView.swift in Sources */,
+				BCB94C5C2C29C966001BA890 /* DateFormatter+Extensions.swift in Sources */,
 				BCB94C402C22E2B2001BA890 /* String+Localization.swift in Sources */,
 				BCB94C152C221009001BA890 /* MainView.swift in Sources */,
+				BCF7062E2C2C318400EE73A3 /* UIStackView+Extensions.swift in Sources */,
+				BCB94C4E2C256D46001BA890 /* ToggleButton.swift in Sources */,
 				BCB94C302C22DF3F001BA890 /* UIView+Extensions.swift in Sources */,
 				BCB94BCC2C21F7AB001BA890 /* AppDelegate.swift in Sources */,
 				BCB94C202C22D43F001BA890 /* Onboarding+Presenter.swift in Sources */,
 				BCB94BCE2C21F7AB001BA890 /* SceneDelegate.swift in Sources */,
+				BCB94C4A2C242D60001BA890 /* NewList+View.swift in Sources */,
+				BCB94C442C2311CB001BA890 /* CustomSegmentedControl.swift in Sources */,
 				BCB94C242C22D460001BA890 /* OnboardingView.swift in Sources */,
 				BCB94C222C22D451001BA890 /* Onboarding+View.swift in Sources */,
+				BCB94C482C242D52001BA890 /* NewList+Presenter.swift in Sources */,
+				BCF706242C2C012600EE73A3 /* UILabel+Extensions.swift in Sources */,
+				BCB94C4C2C242D69001BA890 /* NewListView.swift in Sources */,
 				BCB94C2E2C22DC07001BA890 /* UIFont+Extensions.swift in Sources */,
 				BCB94C112C220FED001BA890 /* Main+Presenter.swift in Sources */,
+				BCF706302C2C385E00EE73A3 /* TextField+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
