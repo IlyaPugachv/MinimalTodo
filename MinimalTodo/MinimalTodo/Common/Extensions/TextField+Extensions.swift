@@ -55,7 +55,7 @@ extension UITextField {
         textField.attributedPlaceholder = NSAttributedString(string: text, attributes: attributes)
     }
     
-    private func addClearButton() {
+    func addClearButton() {
         let clearButton = UIButton(type: .custom)
         clearButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         clearButton.tintColor = .darkGray
@@ -73,7 +73,9 @@ extension UITextField {
     @objc
     private func clearText() {
         self.text = ""
-        sendActions(for: .editingChanged) // Trigger the editing changed event
+        sendActions(for: .editingChanged)
     }
 }
+
+
 

@@ -113,7 +113,7 @@ extension NewList {
                 named: "plus",
                 for: .normal
             )
-
+            
             containerStackView.setupVerticalStackView(
                 spacing: 10,
                 alignment: .fill,
@@ -139,7 +139,7 @@ extension NewList {
             
             addButtonStack.addArrangedSubview(plusTodoImageView)
             addButtonStack.addArrangedSubview(addListButton)
-
+            
             chooseLabel.configureLabel(
                 text: .Localization.chooseALabel,
                 font: .interMedium(of: 20),
@@ -154,7 +154,7 @@ extension NewList {
                 $0.layer.cornerRadius = 6
                 $0.addTarget(self, action: #selector(labelButtonTapped(_:)), for: .touchUpInside)
             }
-
+            
             personalButton.setTitle(
                 .Localization.personal,
                 for: .normal
@@ -174,7 +174,7 @@ extension NewList {
                 .Localization.other,
                 for: .normal
             )
-         
+            
             buttonStackView.setupHorizontalStackView(
                 spacing: 10,
                 distribution: .fillEqually
@@ -194,14 +194,15 @@ extension NewList {
             )
             
             horizontalStack.addArrangedSubview(addTextFieldButton)
-  
+            
             let spacerView = UIView()
             horizontalStack.addArrangedSubview(spacerView)
             
             containerStackView.addArrangedSubview(textFieldStackView)
             containerStackView.addArrangedSubview(horizontalStack)
             
-           
+            titleTextField.addClearButton()
+            hideKeyboardWhenTappedAround()
         }
         
         private func layoutSubviews() {
@@ -219,7 +220,7 @@ extension NewList {
                 containerStackView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 10),
                 containerStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
                 containerStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
-  
+                
                 textFieldStackView.leadingAnchor.constraint(equalTo: containerStackView.leadingAnchor, constant: 10),
                 textFieldStackView.trailingAnchor.constraint(equalTo: containerStackView.trailingAnchor, constant: -10),
                 
@@ -286,14 +287,14 @@ extension NewList {
             let date = DateFormatter.formattedDate()
             let additionalFields = textFields.map { $0.text ?? "" }
             let isPinned = toggleButton.backgroundColor == .black
-
+            
             let newList = TodoList(title: title, label: label, date: date, additionalFields: additionalFields, isPinned: isPinned)
             todoLists.append(newList)
-
+            
             saveTodoListToUserDefaults()
             presenter.updateMainView(with: newList)
         }
-
+        
         private func saveTodoListToUserDefaults() {
             let encoder = JSONEncoder()
             if let encoded = try? encoder.encode(todoLists) {
@@ -320,13 +321,13 @@ extension NewList {
         
         private func createTextFieldView() -> UIView {
             let view = UIView()
-           
+            
             let checkbox = UIButton()
             checkbox.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
             checkbox.setImage(UIImage(systemName: "square"), for: .normal)
             checkbox.tintColor = .black
             checkbox.addTarget(self, action: #selector(checkboxTapped(_:)), for: .touchUpInside)
-           
+            
             let textField = UITextField()
             textField.font = .interRegularLight(of: 14)
             textField.returnKeyType = .done
