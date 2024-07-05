@@ -58,7 +58,7 @@ extension UITextField {
     private func addClearButton() {
         let clearButton = UIButton(type: .custom)
         clearButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-        clearButton.tintColor = .Colors.darkGray
+        clearButton.tintColor = .darkGray
         clearButton.frame = CGRect(x: 0, y: 0, width: 18, height: 18)
         clearButton.addTarget(self, action: #selector(clearText), for: .touchUpInside)
         
@@ -70,8 +70,10 @@ extension UITextField {
         self.rightViewMode = .whileEditing
     }
     
-    @objc 
+    @objc
     private func clearText() {
         self.text = ""
+        sendActions(for: .editingChanged) // Trigger the editing changed event
     }
 }
+

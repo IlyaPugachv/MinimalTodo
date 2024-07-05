@@ -81,7 +81,7 @@ final class TodoListView: UIView {
                 font: .interRegularLight(of: 14),
                 color: .black
             )
-            fieldLabel.tag = 100 // Set a tag to identify this label later
+            fieldLabel.tag = 100
             
             fieldStackView.addArrangedSubview(checkbox)
             fieldStackView.addArrangedSubview(fieldLabel)
@@ -96,7 +96,6 @@ final class TodoListView: UIView {
         
         self.layer.cornerRadius = 15
 
-        
         headerLabel.configureLabel(
             text: todoList.title,
             font: .interMedium(of: 20),

@@ -139,12 +139,14 @@ extension Main {
             
             newListButton.setImage(UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate), for: .normal)
             newListButton.tintColor = .white
+            
+            hideKeyboardWhenTappedAround()
         }
         
         private func layoutSubviews() {
             NSLayoutConstraint.activate([
                 appMiniIconImageView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-                appMiniIconImageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
+                appMiniIconImageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
                 appMiniIconImageView.widthAnchor.constraint(equalToConstant: 31),
                 appMiniIconImageView.heightAnchor.constraint(equalToConstant: 26),
                 
@@ -324,6 +326,25 @@ extension Main {
             contentView.subviews.forEach { $0.isHidden = false }
             updateUI()
         }
+        
+        @objc func hideKeyboardWhenTappedAround() {
+            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
+            tap.cancelsTouchesInView = false
+            view.addGestureRecognizer(tap)
+        }
+
+        @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+            let location = sender.location(in: self.view)
+            
+            // Проверяем, нажата ли кнопка крестик
+            if let clearButton = searchTextField.rightView,
+               clearButton.point(inside: clearButton.convert(location, from: self.view), with: nil) {
+                return
+            }
+            
+            view.endEditing(true)
+        }
+
     }
 }
 
