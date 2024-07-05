@@ -103,6 +103,12 @@ extension NewList {
             configureBackButton()
             configureRightBarButton()
             
+//            titleTextField.configureTextField(
+//                placeholder: .Localization.title,
+//                font: .interSemibold(of: 24),
+//                returnKeyType: .done,
+//                delegate: self)
+            
             titleTextField.configureTextField(
                 placeholder: .Localization.title,
                 font: .interSemibold(of: 24),

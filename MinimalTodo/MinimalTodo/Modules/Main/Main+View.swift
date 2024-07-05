@@ -16,8 +16,8 @@ extension Main {
         private let nameAppLabel: UILabel = .init()
         private let searchImageView: UIImageView = .init()
         private let segmentedControl: CustomSegmentedControl = .init()
-        private let appImage: UIImageView = .init(image: .imageApp)
-        private let appImageOne: UIImageView = .init(image: .imageAppOne)
+        private let imageAllListView: UIImageView = .init(image: .imageApp)
+        private let imagePinnedView: UIImageView = .init(image: .imageAppOne)
         private let createTodoLabel: UILabel = .init()
         private let noPinnedLabel: UILabel = .init()
         private let newListButton: UIButton = .init()
@@ -72,8 +72,8 @@ extension Main {
             view.addView(nameAppLabel)
             view.addView(searchImageView)
             view.addView(segmentedControl)
-            view.addView(appImage)
-            view.addView(appImageOne)
+            view.addView(imageAllListView)
+            view.addView(imagePinnedView)
             view.addView(createTodoLabel)
             view.addView(noPinnedLabel)
             view.addView(newListButton)
@@ -89,18 +89,27 @@ extension Main {
         private func configureSubviews() {
             navigationItem.hidesBackButton = true
             
+            segmentedControl.delegate = self
+            
             fullScreenView.isHidden = true
             fullScreenView.backgroundColor = .white
             
-            searchTextField.placeholder = "Search"
+            searchTextField.placeholder = "Search your list"
             searchTextField.backgroundColor = .white
             searchTextField.borderStyle = .roundedRect
+
+            searchTextField.configureTextField(
+                placeholder: "Search your list",
+                icon: UIImage(systemName: "magnifyingglass"),
+                iconColor: .black,
+                backgroundColor: .Colors.lightGray
+
+            )
             
             cancelButton.setTitle("Cancel", for: .normal)
             cancelButton.setTitleColor(.black, for: .normal)
+            cancelButton.titleLabel?.font = .interMedium(of: 18)
             cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
-            
-            segmentedControl.delegate = self
             
             appMiniIconImageView.contentMode = .scaleAspectFit
             
@@ -128,12 +137,8 @@ extension Main {
             newListButton.backgroundColor = .black
             newListButton.layer.cornerRadius = 32.5
             
-            let plusImage = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate)
-            newListButton.setImage(plusImage, for: .normal)
+            newListButton.setImage(UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate), for: .normal)
             newListButton.tintColor = .white
-
-            scrollView.translatesAutoresizingMaskIntoConstraints = false
-            contentView.translatesAutoresizingMaskIntoConstraints = false
         }
         
         private func layoutSubviews() {
@@ -167,11 +172,11 @@ extension Main {
                 contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
                 contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
                 
-                appImage.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 50),
-                appImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                imageAllListView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 50),
+                imageAllListView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 
-                appImageOne.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 50),
-                appImageOne.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                imagePinnedView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 50),
+                imagePinnedView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 
                 createTodoLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -160),
                 createTodoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -179,7 +184,7 @@ extension Main {
                 noPinnedLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -160),
                 noPinnedLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 
-                newListButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -30),
+                newListButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
                 newListButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 newListButton.widthAnchor.constraint(equalToConstant: 65),
                 newListButton.heightAnchor.constraint(equalToConstant: 65),
@@ -211,20 +216,6 @@ extension Main {
             searchImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(searchImageViewTapped)))
         }
         
-        @objc private func searchImageViewTapped() {
-            fullScreenView.isHidden = false
-            fullScreenView.alpha = 1
-            contentView.subviews.forEach { $0.isHidden = true }
-            searchTextField.becomeFirstResponder()
-        }
-        
-        @objc private func cancelButtonTapped() {
-            fullScreenView.isHidden = true
-            fullScreenView.alpha = 0
-            searchTextField.text = ""
-            contentView.subviews.forEach { $0.isHidden = false }
-            updateUI()
-        }
         
         private func updateUI() {
             contentView.subviews.forEach { $0.removeFromSuperview() }
@@ -238,19 +229,19 @@ extension Main {
             
             if listsToDisplay.isEmpty {
                 if segmentedControl.selectedSegmentIndex == 0 {
-                    appImage.isHidden = false
-                    appImageOne.isHidden = true
+                    imageAllListView.isHidden = false
+                    imagePinnedView.isHidden = true
                     createTodoLabel.isHidden = false
                     noPinnedLabel.isHidden = true
                 } else if segmentedControl.selectedSegmentIndex == 1 {
-                    appImage.isHidden = true
-                    appImageOne.isHidden = false
+                    imageAllListView.isHidden = true
+                    imagePinnedView.isHidden = false
                     createTodoLabel.isHidden = true
                     noPinnedLabel.isHidden = false
                 }
             } else {
-                appImage.isHidden = true
-                appImageOne.isHidden = true
+                imageAllListView.isHidden = true
+                imagePinnedView.isHidden = true
                 createTodoLabel.isHidden = true
                 noPinnedLabel.isHidden = true
                 
@@ -259,7 +250,6 @@ extension Main {
                     let todoListView = TodoListView(todoList: todoList)
                     todoListView.delegate = self
                     contentView.addView(todoListView)
-                    todoListView.translatesAutoresizingMaskIntoConstraints = false
                     
                     NSLayoutConstraint.activate([
                         todoListView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
@@ -311,12 +301,28 @@ extension Main {
             updateUI()
         }
 
-        
         private func saveTodoListsToUserDefaults() {
             let encoder = JSONEncoder()
             if let encoded = try? encoder.encode(todoLists) {
                 UserDefaults.standard.set(encoded, forKey: "TodoLists")
             }
+        }
+        
+        @objc 
+        private func searchImageViewTapped() {
+            fullScreenView.isHidden = false
+            fullScreenView.alpha = 1
+            contentView.subviews.forEach { $0.isHidden = true }
+            searchTextField.becomeFirstResponder()
+        }
+        
+        @objc 
+        private func cancelButtonTapped() {
+            fullScreenView.isHidden = true
+            fullScreenView.alpha = 0
+            searchTextField.text = ""
+            contentView.subviews.forEach { $0.isHidden = false }
+            updateUI()
         }
     }
 }
@@ -341,7 +347,6 @@ extension Main.View: MainView, TodoListViewDelegate {
             noCompletion: { }
         )
     }
-
 }
 
 extension Main.View: CustomSegmentedControlDelegate {

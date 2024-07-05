@@ -95,8 +95,7 @@ final class TodoListView: UIView {
     private func configureSubviews() {
         
         self.layer.cornerRadius = 15
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.black.cgColor
+
         
         headerLabel.configureLabel(
             text: todoList.title,
