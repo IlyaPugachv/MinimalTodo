@@ -61,22 +61,30 @@ extension Onboarding {
         private func configureSubviews() {
             
             appIconImageView.contentMode = .scaleAspectFit
+  
+            appNameLabel.configureLabel(
+                text: "MinimalTodo",
+                font: .interSemibold(of: 38),
+                color: .white, 
+                alignment: .center
+            )
+             
+            infoAboutAppLabel.configureLabel(
+                text: .Localization.writeWhatYouNeedToDoEveryday,
+                font: .interMedium(of: 18),
+                color: .white,
+                alignment: .center
+            )
             
-            appNameLabel.textColor = .white
-            appNameLabel.font = .interSemibold(of: 39)
-            appNameLabel.text = "MinimalTodo"
-            
-            infoAboutAppLabel.textColor = .white
-            infoAboutAppLabel.font = .interMedium(of: 18)
-            infoAboutAppLabel.numberOfLines = 2
-            infoAboutAppLabel.text = .Localization.writeWhatYouNeedToDoEveryday
-            infoAboutAppLabel.textAlignment = .center
-            
-            continueButton.setTitle(.Localization.continuee, for: .normal)
-            continueButton.setTitleColor(.black, for: .normal)
-            continueButton.titleLabel?.font = UIFont.interMedium(of: 16)
-            continueButton.backgroundColor = .white
-            continueButton.layer.cornerRadius = 25
+            infoAboutAppLabel.numberOfLines = 0
+             
+            continueButton.configureButton(
+                title: .Localization.continuee,
+                titleColor: .black,
+                font: .interMedium(of: 16),
+                backgroundColor: .white,
+                cornerRadius: 25
+            )
         }
         
         private func layoutSubviews() {
@@ -107,14 +115,10 @@ extension Onboarding {
                 guard let self else { return }
                 presenter.goToMainScreen()
             }), for: .touchUpInside)
-            
         }
     }
 }
 
-
 // MARK: - Extension View -
 
-extension Onboarding.View: OnboardingView {
-    
-}
+extension Onboarding.View: OnboardingView { }

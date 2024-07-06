@@ -2,6 +2,4 @@ import UIKit
 
 struct Onboarding { }
 
-protocol OnboardingView: ViewDelegate {
-
-}
+protocol OnboardingView: ViewDelegate { }

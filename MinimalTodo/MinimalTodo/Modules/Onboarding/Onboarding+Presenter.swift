@@ -22,9 +22,5 @@ extension Onboarding {
         func goToMainScreen() {
             view?.navigate(to: Main.View.init(with: .init()))
         }
-        
-        // MARK: - Actions -
-        
-        
     }
 }
