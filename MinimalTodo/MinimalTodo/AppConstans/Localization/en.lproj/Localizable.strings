@@ -18,3 +18,9 @@
 "work" = "Work";
 "finance" = "Finance";
 "other" = "Other";
+
+//MARK: - ALERT -
+"deletingYourList" = "Deleting your list.";
+"areYouSureYouWantDeleteThisList" = "Are you sure you want to delette this list?";
+"no" = "No";
+"yes" = "Yes";

@@ -18,3 +18,9 @@
 "work" = "Работа";
 "finance" = "Финансы";
 "other" = "Другое";
+
+//MARK: - ALERT -
+"deletingYourList" = "Удаление вашего списка.";
+"areYouSureYouWantDeleteThisList" = "Вы уверины, что хотите удалить этот список?";
+"no" = "Нет";
+"yes" = "Да";

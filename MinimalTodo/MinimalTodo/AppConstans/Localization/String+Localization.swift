@@ -23,6 +23,12 @@ extension String {
         static var work: String { localise("work") }
         static var finance: String { localise("finance") }
         static var other: String { localise("other") }
+        
+        //MARK: - ALERT -
+        static var deletingYourList: String { localise("deletingYourList") }
+        static var areYouSureYouWantDeleteThisList: String { localise("areYouSureYouWantDeleteThisList") }
+        static var no: String { localise("no") }
+        static var yes: String { localise("yes") }
     }
 }
 

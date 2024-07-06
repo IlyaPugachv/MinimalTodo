@@ -342,12 +342,22 @@ extension Main.View: MainView, TodoListViewDelegate, CustomSegmentedControlDeleg
     
     func todoListViewDidSwipeToDelete(_ todoListView: TodoListView) {
         
-        guard let index = self.todoLists.firstIndex(where: { $0.id == todoListView.todoList.id }) else { return }
-        todoListView.animateDeletion {
-            self.todoLists.remove(at: index)
-            self.saveTodoListsToUserDefaults()
-            self.updateUI()
-        }
+        showAlertWithConfirmation(
+            title: .Localization.deletingYourList,
+            message: .Localization.areYouSureYouWantDeleteThisList,
+            yesButtonTitle: .Localization.yes,
+            noButtonTitle: .Localization.no,
+            yesCompletion: {
+                
+                guard let index = self.todoLists.firstIndex(where: { $0.id == todoListView.todoList.id }) else { return }
+                
+                todoListView.animateDeletion {
+                    self.todoLists.remove(at: index)
+                    self.saveTodoListsToUserDefaults()
+                    self.updateUI() }},
+            
+            noCompletion: { }
+        )
     }
     
     func segmentedControlChanged(to index: Int) {
