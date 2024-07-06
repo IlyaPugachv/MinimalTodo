@@ -1,7 +1,6 @@
 import UIKit
 
 extension UITextField {
-    
     func configureTextField(
         placeholder: String? = nil,
         font: UIFont = .systemFont(ofSize: 14),
@@ -32,27 +31,21 @@ extension UITextField {
             iconView.tintColor = iconColor
             iconView.contentMode = .scaleAspectFit
             
-            let iconContainerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            let iconContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
             iconContainerView.addSubview(iconView)
-            
             self.leftView = iconContainerView
-            self.leftViewMode = .always
         } else {
             let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: frame.height))
             self.leftView = paddingView
-            self.leftViewMode = .always
         }
+        self.leftViewMode = .always
+        
+        self.attributedPlaceholder = NSAttributedString(
+            string: placeholder ?? "",
+            attributes: [.foregroundColor: placeholderColor]
+        )
         
         addClearButton()
-        
-        if let placeholder = placeholder {
-            setPlaceholder(for: self, with: placeholder, color: placeholderColor)
-        }
-    }
-    
-    private func setPlaceholder(for textField: UITextField, with text: String, color: UIColor) {
-        let attributes = [NSAttributedString.Key.foregroundColor: color]
-        textField.attributedPlaceholder = NSAttributedString(string: text, attributes: attributes)
     }
     
     func addClearButton() {
@@ -76,6 +69,3 @@ extension UITextField {
         sendActions(for: .editingChanged)
     }
 }
-
-
-

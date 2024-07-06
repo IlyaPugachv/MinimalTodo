@@ -8,6 +8,8 @@
 "createYourFirstTodoList" = "Создайте свой первый список дел";
 "ooopsNoPinnedListYet" = "Упс! Пока нет закрепленного списка...";
 "newList" = "+ Новый список";
+"searchYourList" = "Найдите свой список";
+"cancel" = "Отменить";
 
 //MARK: - Create New List SCREEN LOCALIZATION -
 "title" = "Заголовок";

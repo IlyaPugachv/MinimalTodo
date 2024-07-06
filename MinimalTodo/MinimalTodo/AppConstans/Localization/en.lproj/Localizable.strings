@@ -8,6 +8,8 @@
 "createYourFirstTodoList" = "Create your first to-do list";
 "ooopsNoPinnedListYet" = "Ooops! No pinned list yet...";
 "newList" = "New List";
+"searchYourList" = "Search your list";
+"cancel" = "Cancel";
 
 //MARK: - Create New List SCREEN LOCALIZATION -
 "title" = "Title";

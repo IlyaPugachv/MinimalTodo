@@ -7,17 +7,24 @@ extension Main {
         
         var presenter: Presenter!
         private lazy var safeArea = self.view.safeAreaLayoutGuide
+        
         private var todoLists: [TodoList] = []
         private var filteredTodoLists: [TodoList] = []
         
         // MARK: - Subviews -
         
+        private let scrollView: UIScrollView = .init()
+        private let contentView: UIView = .init()
+        
         private let appMiniIconImageView: UIImageView = .init(image: .applicationMiniIcon)
         private let nameAppLabel: UILabel = .init()
         private let searchImageView: UIImageView = .init()
+        
         private let segmentedControl: CustomSegmentedControl = .init()
+        
         private let imageAllListView: UIImageView = .init(image: .imageApp)
         private let imagePinnedView: UIImageView = .init(image: .imageAppOne)
+        
         private let createTodoLabel: UILabel = .init()
         private let noPinnedLabel: UILabel = .init()
         private let newListButton: UIButton = .init()
@@ -25,10 +32,7 @@ extension Main {
         private let fullScreenView: UIView = .init()
         private let searchTextField: UITextField = .init()
         private let cancelButton: UIButton = .init()
-
-        private let scrollView: UIScrollView = .init()
-        private let contentView: UIView = .init()
-
+        
         // MARK: - Initializers -
         
         public init(with presenter: Presenter) {
@@ -48,7 +52,6 @@ extension Main {
         public override func viewDidLoad() {
             super.viewDidLoad()
             setup()
-            loadTodoListsFromUserDefaults()
         }
         
         public override func viewWillAppear(_ animated: Bool) {
@@ -63,11 +66,13 @@ extension Main {
             configureSubviews()
             layoutSubviews()
             setupActions()
+            loadTodoListsFromUserDefaults()
             searchTextField.delegate = self
         }
         
         private func buildHierarchy() {
             view.backgroundColor = .white
+            
             view.addView(appMiniIconImageView)
             view.addView(nameAppLabel)
             view.addView(searchImageView)
@@ -87,29 +92,32 @@ extension Main {
         }
         
         private func configureSubviews() {
+            
             navigationItem.hidesBackButton = true
             
             segmentedControl.delegate = self
             
+            searchImageView.image = UIImage(systemName: "magnifyingglass")
+            searchImageView.tintColor = .black
+            searchImageView.isUserInteractionEnabled = true
+            
             fullScreenView.isHidden = true
             fullScreenView.backgroundColor = .white
             
-            searchTextField.placeholder = "Search your list"
-            searchTextField.backgroundColor = .white
-            searchTextField.borderStyle = .roundedRect
-
             searchTextField.configureTextField(
-                placeholder: "Search your list",
+                placeholder: .Localization.searchYourList,
                 icon: UIImage(systemName: "magnifyingglass"),
                 iconColor: .black,
                 backgroundColor: .Colors.lightGray
-
             )
             
-            cancelButton.setTitle("Cancel", for: .normal)
-            cancelButton.setTitleColor(.black, for: .normal)
-            cancelButton.titleLabel?.font = .interMedium(of: 18)
-            cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+            searchTextField.addClearButton()
+            
+            cancelButton.configureButton(
+                title: .Localization.cancel,
+                titleColor: .black,
+                font: .interMedium(of: 16)
+            )
             
             appMiniIconImageView.contentMode = .scaleAspectFit
             
@@ -118,9 +126,6 @@ extension Main {
                 font: .interSemibold(of: 20),
                 color: .black
             )
-            
-            searchImageView.image = UIImage(systemName: "magnifyingglass")
-            searchImageView.tintColor = .black
             
             createTodoLabel.configureLabel(
                 text: .Localization.createYourFirstTodoList,
@@ -134,13 +139,13 @@ extension Main {
                 color: .black
             )
             
-            newListButton.backgroundColor = .black
-            newListButton.layer.cornerRadius = 32.5
+            newListButton.configureButton(
+                backgroundColor: .black,
+                cornerRadius: 32.5,
+                image: UIImage(systemName: "plus"),
+                imageTintColor: .white
+            )
             
-            newListButton.setImage(UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            newListButton.tintColor = .white
-            
-            searchTextField.addClearButton()
             hideKeyboardWhenTappedAround()
         }
         
@@ -210,38 +215,33 @@ extension Main {
         }
         
         private func setupActions() {
+            
             newListButton.addAction(UIAction(handler: { [weak self] _ in
                 guard let self = self else { return }
                 self.presenter.goToNewListScreen()
             }), for: .touchUpInside)
             
-            searchImageView.isUserInteractionEnabled = true
-            searchImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(searchImageViewTapped)))
+            cancelButton.addTarget(self,
+                                   action: #selector(cancelButtonTapped),
+                                   for: .touchUpInside)
+            
+            searchImageView.addGestureRecognizer(
+                UITapGestureRecognizer(target: self,
+                                       action: #selector(searchImageViewTapped))
+            )
         }
-        
         
         private func updateUI() {
             contentView.subviews.forEach { $0.removeFromSuperview() }
             
-            let listsToDisplay: [TodoList]
-            if fullScreenView.isHidden {
-                listsToDisplay = filterTodoLists()
-            } else {
-                listsToDisplay = searchTodoLists(searchTextField.text)
-            }
+            let listsToDisplay: [TodoList] = fullScreenView.isHidden ? filterTodoLists() : searchTodoLists(searchTextField.text)
             
             if listsToDisplay.isEmpty {
-                if segmentedControl.selectedSegmentIndex == 0 {
-                    imageAllListView.isHidden = false
-                    imagePinnedView.isHidden = true
-                    createTodoLabel.isHidden = false
-                    noPinnedLabel.isHidden = true
-                } else if segmentedControl.selectedSegmentIndex == 1 {
-                    imageAllListView.isHidden = true
-                    imagePinnedView.isHidden = false
-                    createTodoLabel.isHidden = true
-                    noPinnedLabel.isHidden = false
-                }
+                let isSegmentedControlZero = segmentedControl.selectedSegmentIndex == 0
+                imageAllListView.isHidden = !isSegmentedControlZero
+                imagePinnedView.isHidden = isSegmentedControlZero
+                createTodoLabel.isHidden = !isSegmentedControlZero
+                noPinnedLabel.isHidden = isSegmentedControlZero
             } else {
                 imageAllListView.isHidden = true
                 imagePinnedView.isHidden = true
@@ -271,13 +271,8 @@ extension Main {
         
         private func filterTodoLists() -> [TodoList] {
             let selectedSegmentIndex = segmentedControl.selectedSegmentIndex
-            switch selectedSegmentIndex {
-            case 0:
-                return todoLists.filter { !$0.isPinned }
-            case 1:
-                return todoLists.filter { $0.isPinned }
-            default:
-                return todoLists.filter { !$0.isPinned }
+            return todoLists.filter {
+                selectedSegmentIndex == 1 ? $0.isPinned : !$0.isPinned
             }
         }
         
@@ -303,7 +298,7 @@ extension Main {
             saveTodoListsToUserDefaults()
             updateUI()
         }
-
+        
         private func saveTodoListsToUserDefaults() {
             let encoder = JSONEncoder()
             if let encoded = try? encoder.encode(todoLists) {
@@ -313,7 +308,7 @@ extension Main {
         
         @objc
         private func searchImageViewTapped() {
- 
+            
             fullScreenView.isHidden = false
             fullScreenView.alpha = 0
             
@@ -343,38 +338,24 @@ extension Main {
     }
 }
 
-extension Main.View: MainView, TodoListViewDelegate {
+extension Main.View: MainView, TodoListViewDelegate, CustomSegmentedControlDelegate, UITextFieldDelegate {
+    
     func todoListViewDidSwipeToDelete(_ todoListView: TodoListView) {
         
-        showAlertWithConfirmation(
-            title: "Удаление",
-            message: "Вы уверены, что хотите удалить этот элемент?",
-            yesButtonTitle: "Да",
-            noButtonTitle: "Нет",
-            yesCompletion: {
-
-                guard let index = self.todoLists.firstIndex(where: { $0.id == todoListView.todoList.id }) else { return }
-                todoListView.animateDeletion {
-                    self.todoLists.remove(at: index)
-                    self.saveTodoListsToUserDefaults()
-                    self.updateUI()
-                }
-            },
-            noCompletion: { }
-        )
+        guard let index = self.todoLists.firstIndex(where: { $0.id == todoListView.todoList.id }) else { return }
+        todoListView.animateDeletion {
+            self.todoLists.remove(at: index)
+            self.saveTodoListsToUserDefaults()
+            self.updateUI()
+        }
     }
-}
-
-extension Main.View: CustomSegmentedControlDelegate {
+    
     func segmentedControlChanged(to index: Int) {
         updateUI()
     }
-}
-
-extension Main.View: UITextFieldDelegate {
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         updateUI()
         return true
     }
 }
-

@@ -13,6 +13,8 @@ extension String {
         static var createYourFirstTodoList: String { localise("createYourFirstTodoList") }
         static var ooopsNoPinnedListYet: String { localise("ooopsNoPinnedListYet") }
         static var newList: String { localise("newList") }
+        static var searchYourList: String { localise("searchYourList") }
+        static var cancel: String { localise("cancel") }
         
         //MARK: - New List -
         static var title: String { localise("title") }
