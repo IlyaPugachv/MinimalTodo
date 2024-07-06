@@ -311,21 +311,34 @@ extension Main {
             }
         }
         
-        @objc 
+        @objc
         private func searchImageViewTapped() {
+ 
             fullScreenView.isHidden = false
-            fullScreenView.alpha = 1
-            contentView.subviews.forEach { $0.isHidden = true }
+            fullScreenView.alpha = 0
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.fullScreenView.alpha = 1
+                self.contentView.subviews.forEach { $0.alpha = 0 }
+            }) { _ in
+                self.contentView.subviews.forEach { $0.isHidden = true }
+            }
+            
             searchTextField.becomeFirstResponder()
         }
         
-        @objc 
+        @objc
         private func cancelButtonTapped() {
-            fullScreenView.isHidden = true
-            fullScreenView.alpha = 0
-            searchTextField.text = ""
-            contentView.subviews.forEach { $0.isHidden = false }
-            updateUI()
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.fullScreenView.alpha = 0
+                self.contentView.subviews.forEach { $0.alpha = 1; $0.isHidden = false }
+            }) { _ in
+                self.fullScreenView.isHidden = true
+                self.searchTextField.text = ""
+                self.fullScreenView.alpha = 1
+                self.updateUI()
+            }
         }
     }
 }
